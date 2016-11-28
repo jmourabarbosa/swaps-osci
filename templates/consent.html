@@ -1,0 +1,95 @@
+<!doctype html>
+<!-- 
+  The consent.html displays the text of your IRB-approved
+  consent form.  Even if you are not required to provide
+  a consent form, it is helpful to use this form to 
+  describe what people can do if an error comes up, etc...
+
+-->
+<html>
+    <head>
+        <title>Psychology Experiment - Informed Consent Form</title>
+        <link rel=stylesheet href="/static/css/bootstrap.min.css" type="text/css">
+        <link rel=stylesheet href="/static/css/style.css" type="text/css">
+        <script type="text/javascript">
+            function onexit() {
+              self.close(); // no harm, no foul here
+            }
+        </script>
+    </head>
+    <body>
+        <div id="container-consent">
+            <div id="consent">
+                <h1>We need your consent to proceed</h1>
+                <hr>
+                <div class="legal well">
+                    <p>
+                    You have been invited to take part in a research study!
+                    </p>
+                    <h3>TITLE OF RESEARCH: Limits of working memory capacity<br>
+                    <small>
+                    INVESTIGATOR: Joao Barbosa, Timothy Buschman, Albert Compte</small> </h3>
+<p>
+    The following informed consent is required by Princeton University for any person involved in a research study conducted by investigators at the University.  This study has been approved by the University's Institutional Review Board for Human Subjects.
+</p>
+<p> You will be asked to perform a task which will probe your working memory capacity limits. It's been reported in scientific literature that working memory capacity is correlated with IQ. 
+</p>
+
+<p>
+You will be briefly shown a set of colored circles on random locations. At the end of each trial, you will be ask to report the color of <b>one of the circles</b>. You have to be very focused if you want to get the maximum reward possible ($5). Sporadically, the black box on the center of the screen will turn red and you have a fraction of a second to click it back to black. The fastest you do that, the higher your final reward will be <b> multiplied </b>. 
+
+</p>
+<h4>Further Questions:</h4>
+<p>
+    If you have questions regarding your rights as a research subject, or if problems arise which you do not feel you can discuss with the Investigator, please contact the Institutional Review Board at:
+</p>
+<blockquote class="text-info">
+<p>
+Office of Research Integrity and Assurance <br />
+Compliance Administrator<br />
+Phone: (609) 258-0865<br />
+Email: irb@princeton.edu<br />
+</p>
+</blockquote>
+<p>
+If you have any questions about this study or the research being conducted, you may contact the research team at <a href="mailto:palerma@gmail.com">palerma@gmail.com</a>. 
+</p>
+                <div class="legal well">
+<p>
+By hitting the "I agree" button below, you confirm that:<br />
+<ol>
+<li>  Your participation is voluntary, and you may withdraw your consent and discontinue participation in the project at any time. Your refusal to participate will not result in any penalty.</li>
+<li>  By signing this agreement, you <emph>do not</emph> waive any legal rights or release Princeton University, its agents, or you from liability for negligence.</li>
+<li>  There may be no direct benefit to you from participation in this study other than the monetary payment as described above, though there may be indirect benefits as a result of what we learn about the human mind from your participation.</li>
+<li>  The information obtained from this study will be confidential. It will be available to the investigators performing the study. Your worker ID will be anonymized and your identity will remain anonymous in any publications resulting from this study.</li>
+<li> You are a legal adult at your jurisdiction. This means you are 21 or older if you are in Mississippi; 19 or older if you are in Alabama, Delaware, and Nebraska; 18 or older in another state, or an emancipated minor according to your local laws.</li>
+<li>  This document and/or additional email communication with the investigators answered any questions that you have regarding the study.
+</li>
+</ol></p>
+
+                    <button type="button" class="btn btn-default btn-sm" onClick="window.print();">
+                    <span class="glyphicon glyphicon-print"></span> Print a copy of this
+                    </button>
+                </div>
+
+                <hr>
+                <h4>Do you understand and consent to these terms?</h4>
+                <br>
+
+                <center>
+                    <button type="button" class="btn btn-primary btn-lg" onClick="window.location='/exp?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}'">
+                    <span class="glyphicon glyphicon-ok"></span> I agree 
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger btn-lg" onClick="onexit()">
+                    <span class="glyphicon glyphicon-ban-circle"></span> No thanks, I do not want to do this HIT
+                    </button>
+                </center>
+
+            </div>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,61 @@
+<div id="container-instructions">
+
+    <h1>Report the correct color</h1>
+
+    <hr />
+
+    <div class="instructions well">
+
+        <p>
+            Finally, you will recieve feeback. The black circle will recover the correct color fill to which you can compare your report. The stroke color tells you if the answer was considered correct - green when correct, red otherwise. If you got the correct color (left panel) your final reward will be increased with the corresponding ammount. If you didn't answered correctly (right panel), your finally reward will remain unchanged. 
+
+            <p></p> 
+
+            Reward amounts depend on the correct trials and valid <i>catches</i>. Performance only depends on percision around the correct colors.
+
+            <p></p> 
+
+            <b>Formula used to compute rewards</b>
+
+            <p></p> 
+
+            mean((ni / n_max) * ci /ci_max )
+
+            where ni = number of items on this trial, n_max = the maximum of number of items on all session, ci = number of catched trials, c_max = total number of catch on this trial.
+
+        </p>
+
+
+        <script type="text/javascript">
+        //console.log(psiTurk.getInstructionIndicator())
+        </script>
+
+    </div>
+
+    <center>
+        <svg  width="800" height="400">
+            <image id="feedback" x="0" y="0" width="800" height="400" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="static/images/feedback.png">
+            </image
+            >
+        </svg>
+    </center>
+
+    <hr />
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+                <button type="button" id="prev" value="prev" class="btn btn-primary btn-lg previous">
+                <span class="glyphicon glyphicon-arrow-left"></span> Previous
+                </button>
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
