@@ -41,48 +41,75 @@ var pos2angle = function (pos,center){
 	return angle;
 }
 
-var gen_stim = function (n_stims,center,R,STIM_SIZE){
+var nanobar = function(){
 
-	stims = [];
-	while (!validate_stims(stims,center,STIM_SIZE)){
-		stims = []
-		for (i=1; i<=n_stims; i++) {
-			angle  = Math.random()*2*Math.PI;
-			color = Math.random()*2*Math.PI;
-			pos = angle2pos(angle,R,center);
-			stims.push({"pos_x": pos[0]+STIM_SIZE, "pos_y": pos[1]+STIM_SIZE, "color": angle2rgb(color)})//, 0: 0, 1: 0})
-		}
-		console.log("went one round of gen_stims")
+	if (session["bar"] == undefined){
+
+		console.log("fuck")
+
+
+
+		var options1 = {
+		  classname: 'my-class',
+		  id: 'nanobar_total',
+		  target: document.getElementById('bar1'),
+		  size: 100
+		};
+
+		var options2 = {
+		  classname: 'my-class',
+		  id: 'nanobar_correct',
+		  target: document.getElementById('bar2')
+		};
+	
+		session["bar"] = []
+		nanobar_total = new Nanobar(options1);
+		nanobar_correct = new Nanobar(options2);
+		session["bar"].push(nanobar_total)
+		session["bar"].push(nanobar_correct)
 	}
 
-	// randomly select the correct trial and flag it as correct
-	c=math.randomInt(0,n_stims);
-	stims[c][CORRECT] = 1
-	return stims;
+	total = (session["trial_number"]+1)/session["n_trials"]*100
+	correct = (session["n_correct"]+1)/session["n_trials"]*100
+
+	console.log(total,correct)
+
+	session["bar"][0].go(total)
+	session["bar"][1].go(correct)
+
+	return session["bar"]
 }
 
 var default_parms = function (type){
 	params={}
 
 	if (type) { 
-	    params["n_trials"] = 1
-	    params["stims"] = [1,2]
-	    params["delays"] = [0,1]
+	    params["n_trials"] = 10
+	    params["stims"] = [1]
+	    params["delays"] = [1]
     	return params
     }
 
-    params["n_trials"] = 2
-	params["stims"] = [3,5,7]
-	params["delays"] = [0,3]
+    params["n_trials"] = 1
+	params["stims"] = [5]
+	params["delays"] = [1]
+
 
 	return params
 }
 
 var gen_trials2 = function(params,callback){
 
+	keys = Object.keys(params)
+	url = "/get_stims?"+keys[0]+"="+params[keys[0]]
+	for (i=1;i<keys.length;i++) {
+		k=keys[i]
+		url+="&"+k+"="+params[k]
+	}
+
 			$.ajax({
 			dataType: "json",
-			url: "/get_stims?n_trials="+params['n_trials']+"&delays="+params['delays']+"&stims="+params["stims"],
+			url: url,
 			success: function(data) {
 				callback(data.results)
 			}

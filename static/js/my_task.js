@@ -32,12 +32,11 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	"instructions/instruct-1.html",
-	"instructions/instruct-2.html",
-	"instructions/instruct-3.html",
-	// "instructions/instruct-4.html",
-	"instructions/instruct-5.html",
-	"instructions/instruct-6.html",
+	// "instructions/instruct-1.html",
+	// "instructions/instruct-2.html",
+	// "instructions/instruct-3.html",
+	// "instructions/instruct-5.html",
+	// "instructions/instruct-6.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -176,6 +175,7 @@ var StroopExperiment = function(trials) {
 		session_init()
 		session["trial_number"]++;
 		hide_wheel()
+		nanobar()
 		setTimeout(function () {next()},FEED_DUR)
 
 	};
@@ -292,6 +292,8 @@ var StroopExperiment = function(trials) {
 
 	// Initialize experiment variables
 	session['trials'] = trials;
+	session["n_trials"] = trials.length
+	session["n_correct"] = 0
 	session['trial_number'] = 0;
 	session['start_time'] = Date.now()
 	session['freq'] = 4
@@ -299,6 +301,8 @@ var StroopExperiment = function(trials) {
 
 	// Load the stage.html snippet into the body of the page
 	psiTurk.showPage('stage.html');
+	session["bar"] = nanobar()
+
 
 	// Start the experiment
 	next();

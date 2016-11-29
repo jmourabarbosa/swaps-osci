@@ -117,8 +117,8 @@ def get_stims():
 
     # trialset = load_from_db(params)
     # return trialset
-    if not request.args.has_key('n_trials'):
-        abort(400)
+    # if not request.args.has_key('n_trials'):
+    #     abort(400)
 
     params = {}
     params["n_trials"]  = int(request.args['n_trials'])
@@ -127,6 +127,7 @@ def get_stims():
 
     params["stims"]  = map(int,params["stims"].split(","))
     params["delays"] = map(int,params["delays"].split(","))
+
 
     try:
         trialset = load_from_db(params)
@@ -148,7 +149,6 @@ def gen_trial_idx(max_t,n):
 
 def load_from_db(params):
     trialset = []
-    assert params["n_trials"]< len(all_trials)+1
 
     for show in [0,1]:
         for delay in params["delays"]:

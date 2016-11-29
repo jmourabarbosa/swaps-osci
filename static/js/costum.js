@@ -23,6 +23,42 @@ var flicker_stim = function(){
 
 }
 
+var flicker_all_stim = function(){
+
+	// if ((session["state"] != REPORT) && (session["state"] != DELAY)){
+	// 	return
+	// }
+
+	// if ((session["state"] != DELAY)){
+	// 	return
+	// }
+
+	if (session["state"] != REPORT){
+		return
+	}
+	
+	// rad = STIM_SIZE
+	// if(oscilate(session["freq"])<0){
+	// 	rad = 0
+	// }
+
+	// oscilate() -> [-1,1] => abs(oscilate()/2)=> [0-1]
+	rad = math.abs(STIM_SIZE*(oscilate(session["freq"]/2)))
+
+	var all_stims = d3.select("#all_stims").selectAll("[id^='stim']")[0]
+	var n_stims = all_stims.length
+
+
+	while (n_stims) {
+		var stim = all_stims[n_stims-1];
+		stim.setAttribute("r",rad)
+		n_stims--
+	}
+
+	window.requestAnimationFrame(flicker_all_stim)
+
+}
+
 var flicker_correct = function(){
 	// if (session["state"] != FINISH){
 	// 	return
@@ -173,21 +209,42 @@ var feedback = function(report_pos,report_angle){
 	correct_pos = angle2pos(correct_color,WHEEL_Y/2-21,CENTER)
 	correct_angle = circ_dist(correct_color,wheel_offset[session["wheel_n"]])
 
+
+
 	// normalize to this wheel rotation
 	report_angle =  circ_dist(report_angle,wheel_offset[session["wheel_n"]])
 	if (math.abs(circ_dist(report_angle, correct_angle)) > CORRECT_THR){
-		stroke = encapsulate_rgb([250,0,0])
+		// stroke = encapsulate_rgb([250,0,0])
+		feed_text = "wrong"
+		fill = "red"
 	}
 	else{
-		stroke = encapsulate_rgb([0,250,0])
+		// stroke = encapsulate_rgb([0,250,0])
+		feed_text = "correct"
+		fill = "green"
+		session["n_correct"]++
 	}
+
+
+	screen.insert("text")
+		.attr("x",CENTER[0]-80)
+		.attr("y", CENTER[1]-80)
+		.attr("id","feedback")
+		.attr("font-size",50)
+		.attr("font-family","Verdana")
+	
+	feed = $("#feedback")[0]
+
+	feed.innerHTML=feed_text
+	feed.setAttribute("fill", fill)
+
 
 	screen.insert("circle")
 		.attr("cx", report_pos[0])
 		.attr("cy", report_pos[1])
 		.attr("r", STIM_SIZE)
 		.style("fill", encapsulate_rgb(report_color))
-		.style("stroke", stroke)
+		// .style("stroke", stroke)
 		.style("stroke-width","4px")
 		.attr("fill-opacity","1");
 
@@ -293,6 +350,7 @@ var blank_stimuli = function(){
 		var stim = all_stims[n_stims-1];
 		stim.setAttribute("style","fill: gray");
 		stim.setAttribute("fill-opacity","1")
+		stim.setAttribute("r",STIM_SIZE)
 		n_stims--
 	}
 }
