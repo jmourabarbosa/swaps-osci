@@ -247,7 +247,7 @@ var StroopExperiment = function(trials) {
 				//drop_stimuli()
 				if (!session["show"])
 					hide_stimulus()
-				// window.requestAnimationFrame(flicker_background)
+				window.requestAnimationFrame(flicker_all_stim)
 				session["state"] = REPORT;
 				setTimeout(function () {show_trial()},session["delay"])
 				break;

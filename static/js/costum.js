@@ -66,6 +66,27 @@ var default_params = function (type){
 	return params
 }
 
+var default_parms_freq = function (type){
+	params={}
+	params["max_reward"] = 10
+
+	if (type) { 
+	    params["n_trials"] = 10
+	    params["stims"] = [1]
+	    params["delays"] = [1]
+	    params["freqs"] = [10]
+    }
+    else {
+	    params["n_trials"] = 1
+		params["stims"] = [5]
+		params["delays"] = [1]
+		params["freqs"] = [8]
+	}
+
+	params["total_trials"] = params["freqs"].length*params["n_trials"]*params["stims"].length*params["delays"].length
+	return params
+}
+
 var gen_trials2 = function(params,callback){
 
 	keys = Object.keys(params)
@@ -88,6 +109,36 @@ var gen_trials2 = function(params,callback){
 var oscilate = function(freq){
 	y = math.sin(2*math.pi*freq*(Date.now()-session['start_time'])/1000);
 	return y
+}
+
+var flicker_all_stim = function(){
+
+
+
+	if (session["state"] != REPORT){
+		return
+	}
+	
+	// rad = STIM_SIZE
+	// if(oscilate(session["freq"])<0){
+	// 	rad = 0
+	// }
+
+	// oscilate() -> [-1,1] => abs(oscilate()/2)=> [0-1]
+	rad = math.abs(STIM_SIZE*(oscilate(session["freq"]/2)))
+
+	var all_stims = d3.select("#all_stims").selectAll("[id^='stim']")[0]
+	var n_stims = all_stims.length
+
+
+	while (n_stims) {
+		var stim = all_stims[n_stims-1];
+		stim.setAttribute("r",rad)
+		n_stims--
+	}
+
+	window.requestAnimationFrame(flicker_all_stim)
+
 }
 
 var flicker_stim = function(){
