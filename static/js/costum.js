@@ -57,8 +57,8 @@ var default_params = function (type){
 	    params["delays"] = [1]
     }
     else {
-	    params["n_trials"] = 10
-		params["stims"] = [1,3,2,5]
+	    params["n_trials"] = 5
+		params["stims"] = [2,3,4,5]
 		params["delays"] = [0,3]
 	}
 
@@ -71,7 +71,7 @@ var default_parms_freq = function (type){
 	params["max_reward"] = 10
 
 	if (type) { 
-	    params["n_trials"] = 10
+	    params["n_trials"] = 5
 	    params["stims"] = [1]
 	    params["delays"] = [1]
 	    params["freqs"] = [10]

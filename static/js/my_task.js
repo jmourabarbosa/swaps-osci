@@ -106,7 +106,7 @@ UP=0
 MAX_CATCH=2
 CATCH_INTERVAL=500
 CATCH_TIMEOUT=1000
-CORRECT_THR=0.5
+CORRECT_THR=0.75
 
 WHITE=0
 BLACK=1
@@ -262,7 +262,7 @@ var StroopExperiment = function(trials) {
 				bold_correct(screen);
 				$("#all_stims").click(response_handler);
 				session["listening"] = 1;
-				window.requestAnimationFrame(flicker_correct)
+				//window.requestAnimationFrame(flicker_correct)
 				break;
 		}
 
