@@ -1,0 +1,48 @@
+<div id="container-instructions">
+
+    <h1>Progress bars</h1>
+
+    <hr />
+
+    <div class="instructions well">
+
+        <p>
+            During the whole trial, two bars will be shown at the top. 
+            The overall progress bar (i.e. how far in the experiment are you) will be shown on top and colored black.
+            Below shown in green, you can see how much money have you made up to this point. Maximum possible reward is told at the begining of each round.
+        </p>
+
+
+        <script type="text/javascript">
+        //console.log(psiTurk.getInstructionIndicator())
+        </script>
+
+    </div>
+
+    <center>
+        <svg  width="800" height="200">
+            <image id="feedback" x="0" y="0" width="800" height="200" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="static/images/progress_bar.png">
+            </image
+            >
+        </svg>
+    </center>
+
+    <hr />
+    <div class="instructionsnav">
+        <div class="row">
+            <div class="col-xs-2">
+                <button type="button" id="prev" value="prev" class="btn btn-primary btn-lg previous">
+                <span class="glyphicon glyphicon-arrow-left"></span> Previous
+                </button>
+            </div>
+            <div class="col-xs-8">
+            </div>
+            <div class="col-xs-2">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

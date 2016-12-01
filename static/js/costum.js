@@ -296,14 +296,20 @@ var feedback = function(report_pos,report_angle){
 	correct_pos = angle2pos(correct_color,WHEEL_Y/2-21,CENTER)
 
 	if (math.abs(circ_dist(report_angle, correct_color)) > CORRECT_THR){
-		feed_text = "wrong"
-		fill = "red"
+		feed_text = "$0"
+		fill = "#FA5858"
+		animation="fadeOutDown"
+		center = [CENTER[0]-40,CENTER[1]-80]
+
 	}
 	else{
-		feed_text = "correct"
-		fill = "green"
+		feed_text = "$"+math.round(session["factor"]*session["n_stims"]*session["max_reward"],2)
+		fill ="#58FA58"
 		session["n_correct"]++
 		session["acc_rwd"] += session["factor"]*session["n_stims"] 
+		animation="fadeOutUp"
+
+		center = [CENTER[0]-80,CENTER[1]-80]
 	}
 
 	// rotate correct color for this wheel rotation
@@ -313,8 +319,8 @@ var feedback = function(report_pos,report_angle){
 
 
 	screen.insert("text")
-		.attr("x",CENTER[0]-80)
-		.attr("y", CENTER[1]-80)
+		.attr("x",center[0])
+		.attr("y", center[0])
 		.attr("id","feedback")
 		.attr("font-size",50)
 		.attr("font-family","Verdana")
@@ -324,7 +330,7 @@ var feedback = function(report_pos,report_angle){
 	feed.innerHTML=feed_text
 	feed.setAttribute("fill", fill)
 
-
+	$('#feedback').addClass('animated '+animation);
 	screen.insert("circle")
 		.attr("cx", report_pos[0])
 		.attr("cy", report_pos[1])

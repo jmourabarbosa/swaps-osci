@@ -91,7 +91,7 @@ seed(96)
 # seed(int(time.time()))
 
 num_cores = multiprocessing.cpu_count()
-all_trials = Parallel(n_jobs=num_cores)(delayed(gen_trials)(1000,n) for n in range(1,8))
+all_trials = Parallel(n_jobs=num_cores)(delayed(gen_trials)(1000,n) for n in range(1,9))
 
 f = open("all_trials.pickle","w")
 dump(all_trials,f)

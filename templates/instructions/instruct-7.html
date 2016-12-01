@@ -1,31 +1,25 @@
 <div id="container-instructions">
 
-    <h1>Progress bars</h1>
+    <h1>Reward formula</h1>
 
     <hr />
 
     <div class="instructions well">
 
-        <p>
-            During the whole trial, two bars will be shown at the top of the screen. 
-            The overall progress bar (i.e. how far in the experiment are you) will be shown on the top colored black.
-            Below shown in green, you can see how much money have you made up to this point. Maximum possible reward will be told at the begining of each round.
+               <b>Formula used to compute rewards</b>
 
             <p></p> 
 
-            Reward amounts depend on the number of correct trials sacled by difficulty. For 4 item trial, the reward is 4x higher. Performance only depends on percision around the correct colors.
+            <div>
+                <svg  width="200" height="200">
+                    <image id="formula" x="0" y="0" width="200" height="200" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="static/images/rwd_formula.png">
+                    </image>
+                </svg>
+            </div>
 
-            <p></p> 
+            <i>p</i> measures the individual performance and it ranges from 0 to 1. This value is finally multiplied for the maximum reward. If you have maximum performance, you will naturally get the maximum reward. 
 
-            <b>Formula used to compute rewards</b>
-
-            <p></p> 
-
-            mean((ni / n_max) * ci /ci_max )
-
-            where ni = number of items on this trial, n_max = the maximum of number of items on all session, ci = number of catched trials, c_max = total number of catch on this trial.
-
-        </p>
+            
 
 
         <script type="text/javascript">
@@ -34,13 +28,6 @@
 
     </div>
 
-    <center>
-        <svg  width="800" height="400">
-            <image id="feedback" x="0" y="0" width="800" height="400" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="static/images/feedback.png">
-            </image
-            >
-        </svg>
-    </center>
 
     <hr />
     <div class="instructionsnav">

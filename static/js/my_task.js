@@ -19,6 +19,8 @@ var pages = [
 	// "instructions/instruct-4.html",
 	"instructions/instruct-5.html",
 	"instructions/instruct-6.html",
+	"instructions/instruct-7.html",
+	"instructions/instruct-8.html",
 	"instructions/instruct-ready.html",
 
 	"repeat_task.html",
@@ -33,11 +35,13 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	// "instructions/instruct-1.html",
-	// "instructions/instruct-2.html",
-	// "instructions/instruct-3.html",
-	// "instructions/instruct-5.html",
-	// "instructions/instruct-6.html",
+	"instructions/instruct-1.html",
+	"instructions/instruct-2.html",
+	"instructions/instruct-3.html",
+	"instructions/instruct-5.html",
+	"instructions/instruct-6.html",
+	"instructions/instruct-7.html",
+	"instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -179,7 +183,6 @@ var StroopExperiment = function(trials) {
 		hide_wheel()
 		nanobar()
 		setTimeout(function () {next()},FEED_DUR)
-
 	};
 
 
