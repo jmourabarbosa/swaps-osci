@@ -340,6 +340,8 @@ var session_init=function(){
 
 
 var feedback = function(report_pos,report_angle){
+	hide_stimulus()
+
 
 	report_color = angle2rgb(report_angle);
 	correct = session["trial"][session['correct']];
@@ -385,16 +387,25 @@ var feedback = function(report_pos,report_angle){
 	screen.insert("circle")
 		.attr("cx", report_pos[0])
 		.attr("cy", report_pos[1])
-		.attr("r", STIM_SIZE)
+		.attr("r", STIM_SIZE/2)
 		.style("fill", encapsulate_rgb(report_color))
-		// .style("stroke", stroke)
-		.style("stroke-width","4px")
+		.style("stroke", "black")
+		.style("stroke-width","1px")
+		.attr("fill-opacity","1");
+
+	correct_pos = angle2pos(correct_angle,WHEEL_Y/2-21,CENTER)
+	screen.insert("circle")
+		.attr("cx", correct_pos[0])
+		.attr("cy", correct_pos[1])
+		.attr("r", STIM_SIZE)
+		.style("fill", encapsulate_rgb(angle2rgb(correct_color)))
+		.style("stroke", "black")
+		.style("stroke-width","1px")
 		.attr("fill-opacity","1");
 
 
-
-	// correct_pos_r = angle2pos(circ_dist(correct_angle,0.5),WHEEL_Y/2-21,CENTER)
-	// correct_pos_l = angle2pos(circ_dist(correct_angle,-0.5),WHEEL_Y/2-21,CENTER)
+	correct_pos_r = angle2pos(circ_dist(correct_angle,0.5),WHEEL_Y/2-21,CENTER)
+	correct_pos_l = angle2pos(circ_dist(correct_angle,-0.5),WHEEL_Y/2-21,CENTER)
 
 	// screen.insert("line")
 	// 	.attr("x1", CENTER[0])
@@ -417,9 +428,11 @@ var feedback = function(report_pos,report_angle){
 	// 	.style("stroke-dasharray","5,5")
 	// 	.attr("fill-opacity","1");
 
-	stim = d3.select("#all_stims").select("#stim"+session["correct"])[0][0]
-	stim.setAttribute("style","fill: "+encapsulate_rgb(angle2rgb(correct_color)))
-	stim.setAttribute("stroke-width","8px")
+
+	// color correct stim color
+	// stim = d3.select("#all_stims").select("#stim"+session["correct"])[0][0]
+	// stim.setAttribute("style","fill: "+encapsulate_rgb(angle2rgb(correct_color)))
+	// stim.setAttribute("stroke-width","8px")
 
 
 

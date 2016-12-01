@@ -106,7 +106,7 @@ UP=0
 MAX_CATCH=2
 CATCH_INTERVAL=500
 CATCH_TIMEOUT=1000
-CORRECT_THR=0.75
+CORRECT_THR=0.5
 
 WHITE=0
 BLACK=1
@@ -162,7 +162,7 @@ var StroopExperiment = function(trials) {
 
 		rt = new Date().getTime() - session["wheel_on"];
 
-		psiTurk.recordTrialData({	'load': session["trials"].length,
+		psiTurk.recordTrialData({	'load': session["trial"].length,
 									'delay': session["delay"],
 									'show': session["show"],
 									'report_color': report_angle,
@@ -171,9 +171,9 @@ var StroopExperiment = function(trials) {
 									'report_pos': report_pos,
 									'report_on_screen': report_on_screen,
 									'n_drop': session["n_drop"],
-									'trial': JSON.stringify(session["trial"]),
-									'session': JSON.stringify(session)}
-                               );
+									'trial': JSON.stringify(session["trial"])
+									//'session': JSON.stringify(session)
+                               });
 
 		feedback(report_on_screen,report_angle)
 
@@ -247,7 +247,7 @@ var StroopExperiment = function(trials) {
 				//drop_stimuli()
 				if (!session["show"])
 					hide_stimulus()
-				window.requestAnimationFrame(flicker_all_stim)
+				//window.requestAnimationFrame(flicker_all_stim)
 				session["state"] = REPORT;
 				setTimeout(function () {show_trial()},session["delay"])
 				break;
