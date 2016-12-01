@@ -27,6 +27,7 @@ var pages = [
 	"thanks.html",
 	"press_space.html",
 	"postquestionnaire.html",
+	"error.html",
 ];
 
 psiTurk.preloadPages(pages);
@@ -124,6 +125,7 @@ var StroopExperiment = function(trials) {
 			session["delay"] = session["trial"][0]["delay"]*1000
 			session["state"] = FIX;
 			session["show"] = session["trial"][0]["show"]
+			session["n_stims"] = session["trial"].length
 			screen = start_screen();
 			draw_fix(screen,"white");
 			$("#fixation").mouseover(show_trial)
@@ -147,6 +149,8 @@ var StroopExperiment = function(trials) {
     		report_x = report_y = 1;
     	}
 
+
+
 		report_angle = pos2angle([report_x,report_y],CENTER);
 		report_angle = circ_dist(report_angle,-wheel_offset[session["wheel_n"]])
 		report_pos = angle2pos(report_angle,250,CENTER);
@@ -154,19 +158,17 @@ var StroopExperiment = function(trials) {
 
 		rt = new Date().getTime() - session["wheel_on"];
 
-		psiTurk.recordTrialData({'phase':session["phase"],
-                                 'report_x':report_x,
-                                 'report_y':report_y,
-                                 'report_angle': report_angle,
-                                 'report_pos': report_pos,
-                                 'report_pos': report_on_screen,
-                                 'rt':rt,
-                                 'n_catch': session["n_catch"],
-                                 'n_drop': session["n_drop"],
-                                 'catch_rt': session["catch_rt"],
-                                 'trial': JSON.stringify(session["trial"]),
-                                 'trial': session["trial"],
-                             	 'session': session}
+		psiTurk.recordTrialData({	'load': session["trials"].length,
+									'delay': session["delay"],
+									'show': session["show"],
+									'report_color': report_angle,
+									'rt':rt,
+									'phase':session["phase"],
+									'report_pos': report_pos,
+									'report_on_screen': report_on_screen,
+									'n_drop': session["n_drop"],
+									'trial': JSON.stringify(session["trial"]),
+									'session': JSON.stringify(session)}
                                );
 
 		feedback(report_on_screen,report_angle)
@@ -264,6 +266,17 @@ var StroopExperiment = function(trials) {
 
 	};
 
+	var abort = function(){
+		value = math.round(session["acc_rwd"]*session["max_reward"]+0.5,2)
+		answer = confirm("Do you want to abort with with $"+value+"?");
+		// answer = are_you_sure()
+
+		if (answer) {
+			psiTurk.showPage('thanks.html'); 
+			currentview = new Questionnaire();
+		}
+	}
+
 	var finish = function() {
 	switch (session["phase"]) {
 
@@ -279,7 +292,7 @@ var StroopExperiment = function(trials) {
 			$("#repeat").click(start_test);
 			$("#begin").click(function () {
 				session['phase'] = TASK; 
-		 		params = default_parms(TASK);
+		 		params = default_params(TASK);
 		 		gen_trials2(params,exp_callback);
 		 	});
     		break;
@@ -292,27 +305,31 @@ var StroopExperiment = function(trials) {
 
 	// Initialize experiment variables
 	session['trials'] = trials;
-	session["n_trials"] = trials.length
+	session["total_trials"] = trials.length
 	session["n_correct"] = 0
 	session['trial_number'] = 0;
 	session['start_time'] = Date.now()
-	session['freq'] = 4
+	session['acc_rwd'] = 0
+	session["bar"] = undefined
+	session["max_reward"] = 5
 	session_init();
 
 	// Load the stage.html snippet into the body of the page
 	psiTurk.showPage('stage.html');
 	session["bar"] = nanobar()
+	session["factor"] = compute_factor()
 
+	$("#abort").click(function () { abort()});
 
 	// Start the experiment
 	next();
 };
 
-exp_callback = function(trials) { currentview = new StroopExperiment(trials) }
+exp_callback = function(trials,params) { session["params"] = params;currentview = new StroopExperiment(trials) }
 
 var start_test = function(){
 
-	params = default_parms(TEST);
+	params = default_params(TEST);
 	session['phase'] = TEST
     psiTurk.doInstructions(
     	instructionPages, 

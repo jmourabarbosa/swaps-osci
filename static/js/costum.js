@@ -1,3 +1,90 @@
+function compute_factor(){
+
+	params = session["params"]
+	n_stims = params["stims"]
+
+	factor = 1/math.sum(n_stims)
+
+	if (factor > 1)
+		psiTurk.showPage('error.html');
+
+	return factor/session["total_trials"]*n_stims.length
+
+}
+
+
+var nanobar = function(){
+
+	if (session["bar"] == undefined){
+
+		var options1 = {
+		  classname: 'my-class',
+		  id: 'nanobar_total',
+		  target: document.getElementById('bar1'),
+		  size: 100
+		};
+
+		var options2 = {
+		  classname: 'my-class',
+		  id: 'nanobar_correct',
+		  target: document.getElementById('bar2')
+		};
+	
+		session["bar"] = []
+		nanobar_total = new Nanobar(options1);
+		nanobar_correct = new Nanobar(options2);
+		session["bar"].push(nanobar_total)
+		session["bar"].push(nanobar_correct)
+	}
+
+	total = (session["trial_number"])/session["total_trials"]*100
+	correct = session["acc_rwd"]*100
+
+	session["bar"][0].go(total)
+	session["bar"][1].go(correct)
+
+	return session["bar"]
+}
+
+var default_params = function (type){
+
+	params={}
+	params["max_reward"] = 10
+
+	if (type) { 
+	    params["n_trials"] = 1
+	    params["stims"] = [1,3]
+	    params["delays"] = [1]
+    }
+    else {
+	    params["n_trials"] = 10
+		params["stims"] = [1,3,2,5]
+		params["delays"] = [0,3]
+	}
+
+	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*params["delays"].length
+	return params
+}
+
+var gen_trials2 = function(params,callback){
+
+	keys = Object.keys(params)
+	url = "/get_stims?"+keys[0]+"="+params[keys[0]]
+	for (i=1;i<keys.length;i++) {
+		k=keys[i]
+		url+="&"+k+"="+params[k]
+	}
+
+			$.ajax({
+			dataType: "json",
+			url: url,
+			success: function(data) {
+				callback(data.results,params)
+			}
+		})
+}
+
+
 var oscilate = function(freq){
 	y = math.sin(2*math.pi*freq*(Date.now()-session['start_time'])/1000);
 	return y
@@ -207,23 +294,22 @@ var feedback = function(report_pos,report_angle){
 	correct = session["trial"][session['correct']];
 	correct_color = correct["color"]
 	correct_pos = angle2pos(correct_color,WHEEL_Y/2-21,CENTER)
-	correct_angle = circ_dist(correct_color,wheel_offset[session["wheel_n"]])
 
-
-
-	// normalize to this wheel rotation
-	report_angle =  circ_dist(report_angle,wheel_offset[session["wheel_n"]])
-	if (math.abs(circ_dist(report_angle, correct_angle)) > CORRECT_THR){
-		// stroke = encapsulate_rgb([250,0,0])
+	if (math.abs(circ_dist(report_angle, correct_color)) > CORRECT_THR){
 		feed_text = "wrong"
 		fill = "red"
 	}
 	else{
-		// stroke = encapsulate_rgb([0,250,0])
 		feed_text = "correct"
 		fill = "green"
 		session["n_correct"]++
+		session["acc_rwd"] += session["factor"]*session["n_stims"] 
 	}
+
+	// rotate correct color for this wheel rotation
+	// report angle was rotated on main routine, so also rotating it back
+	correct_angle = circ_dist(correct_color,wheel_offset[session["wheel_n"]])
+	report_angle =  circ_dist(report_angle,wheel_offset[session["wheel_n"]])
 
 
 	screen.insert("text")
@@ -343,7 +429,8 @@ var hide_stimulus = function(){
 
 var blank_stimuli = function(){
 	var all_stims = d3.select("#all_stims").selectAll("[id^='stim']")[0]
-	var n_stims = all_stims.length
+	// var n_stims = all_stims.length
+	n_stims = session["n_stims"]
 
 
 	while (n_stims) {
@@ -424,13 +511,16 @@ var draw_fix = function(screen,color){
 
 var update_stats = function(){
 
-// 	"n_catch">X</
-// "total_catch"
-// "performance"
-// "reward">XX</
-// "max_reward">
+	// In every entry of reward, change it to the actual performance.
+	rws=d3.selectAll("#reward")[0]
+	for (i=0;i<rws.length;i++)
+		rws[i].innerHTML = session["acc_rwd"]*100
 
-	// $("#n_catch")[0].innerHTML = session["n_catch"]
+	parms = default_params()
+
+	$("#total_trials")[0].innerHTML = params["total_trials"]
+	$("#max_reward")[0].innerHTML = params["max_reward"]
+
 }
 
 var Questionnaire = function() {
@@ -476,7 +566,7 @@ var Questionnaire = function() {
 	    record_responses();
 	    psiTurk.saveData({
             success: function(){
-                psiTurk.computeBonus('compute_bonus', function() { 
+                psiTurk.computeBonus('compute_bonus', function() {
                 	psiTurk.completeHIT(); // when finished saving compute bonus, the quit
                 }); 
             }, 

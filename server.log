@@ -67,3 +67,638 @@ Traceback (most recent call last):
   File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1566, in make_response
     raise ValueError('View function did not return a response')
 ValueError: View function did not return a response
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27758)
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27759)
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27760)
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27761)
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27762)
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27763)
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27764)
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27765)
+[2016-11-29 19:01:32 -0500] [27754] [CRITICAL] WORKER TIMEOUT (pid:27766)
+2016-11-29 19:10:05,504 error_setting_worker_complete (1017) {'uniqueId': [u'debugEcHRT:debugUwRXc']}
+2016-11-29 19:10:11,522 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 249, in advertisement
+    filter(Participant.workerid == worker_id).\
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2535, in count
+    return self.from_self(col).scalar()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2341, in scalar
+    ret = self.one()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2310, in one
+    ret = list(self)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) no such table: swaps u'SELECT count(*) AS count_1 \nFROM (SELECT swaps.uniqueid AS swaps_uniqueid, swaps.assignmentid AS swaps_assignmentid, swaps.workerid AS swaps_workerid, swaps.hitid AS swaps_hitid, swaps.ipaddress AS swaps_ipaddress, swaps.browser AS swaps_browser, swaps.platform AS swaps_platform, swaps.language AS swaps_language, swaps.cond AS swaps_cond, swaps.counterbalance AS swaps_counterbalance, swaps.codeversion AS swaps_codeversion, swaps.beginhit AS swaps_beginhit, swaps.beginexp AS swaps_beginexp, swaps.endhit AS swaps_endhit, swaps.bonus AS swaps_bonus, swaps.status AS swaps_status, swaps.datastring AS swaps_datastring \nFROM swaps \nWHERE swaps.assignmentid != ? AND swaps.workerid = ?) AS anon_1' (u'debugTCIBz', u'debugoHv5Y')
+2016-11-29 19:27:47,988 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 249, in advertisement
+    filter(Participant.workerid == worker_id).\
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2535, in count
+    return self.from_self(col).scalar()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2341, in scalar
+    ret = self.one()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2310, in one
+    ret = list(self)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) no such table: swaps u'SELECT count(*) AS count_1 \nFROM (SELECT swaps.uniqueid AS swaps_uniqueid, swaps.assignmentid AS swaps_assignmentid, swaps.workerid AS swaps_workerid, swaps.hitid AS swaps_hitid, swaps.ipaddress AS swaps_ipaddress, swaps.browser AS swaps_browser, swaps.platform AS swaps_platform, swaps.language AS swaps_language, swaps.cond AS swaps_cond, swaps.counterbalance AS swaps_counterbalance, swaps.codeversion AS swaps_codeversion, swaps.beginhit AS swaps_beginhit, swaps.beginexp AS swaps_beginexp, swaps.endhit AS swaps_endhit, swaps.bonus AS swaps_bonus, swaps.status AS swaps_status, swaps.datastring AS swaps_datastring \nFROM swaps \nWHERE swaps.assignmentid != ? AND swaps.workerid = ?) AS anon_1' (u'debugohXff', u'debugS5PWy')
+2016-11-29 19:28:00,425 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 249, in advertisement
+    filter(Participant.workerid == worker_id).\
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2535, in count
+    return self.from_self(col).scalar()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2341, in scalar
+    ret = self.one()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2310, in one
+    ret = list(self)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) no such table: swaps u'SELECT count(*) AS count_1 \nFROM (SELECT swaps.uniqueid AS swaps_uniqueid, swaps.assignmentid AS swaps_assignmentid, swaps.workerid AS swaps_workerid, swaps.hitid AS swaps_hitid, swaps.ipaddress AS swaps_ipaddress, swaps.browser AS swaps_browser, swaps.platform AS swaps_platform, swaps.language AS swaps_language, swaps.cond AS swaps_cond, swaps.counterbalance AS swaps_counterbalance, swaps.codeversion AS swaps_codeversion, swaps.beginhit AS swaps_beginhit, swaps.beginexp AS swaps_beginexp, swaps.endhit AS swaps_endhit, swaps.bonus AS swaps_bonus, swaps.status AS swaps_status, swaps.datastring AS swaps_datastring \nFROM swaps \nWHERE swaps.assignmentid != ? AND swaps.workerid = ?) AS anon_1' (u'debugohXff', u'debugS5PWy')
+2016-11-29 19:28:03,651 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 249, in advertisement
+    filter(Participant.workerid == worker_id).\
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2535, in count
+    return self.from_self(col).scalar()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2341, in scalar
+    ret = self.one()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2310, in one
+    ret = list(self)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) no such table: swaps u'SELECT count(*) AS count_1 \nFROM (SELECT swaps.uniqueid AS swaps_uniqueid, swaps.assignmentid AS swaps_assignmentid, swaps.workerid AS swaps_workerid, swaps.hitid AS swaps_hitid, swaps.ipaddress AS swaps_ipaddress, swaps.browser AS swaps_browser, swaps.platform AS swaps_platform, swaps.language AS swaps_language, swaps.cond AS swaps_cond, swaps.counterbalance AS swaps_counterbalance, swaps.codeversion AS swaps_codeversion, swaps.beginhit AS swaps_beginhit, swaps.beginexp AS swaps_beginexp, swaps.endhit AS swaps_endhit, swaps.bonus AS swaps_bonus, swaps.status AS swaps_status, swaps.datastring AS swaps_datastring \nFROM swaps \nWHERE swaps.assignmentid != ? AND swaps.workerid = ?) AS anon_1' (u'debugtboSa', u'debug4hEtb')
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28204)
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28205)
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28206)
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28207)
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28208)
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28209)
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28210)
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28211)
+[2016-11-30 01:55:46 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28212)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28336)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28335)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28337)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28338)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28339)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28340)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28334)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28342)
+[2016-11-30 10:14:25 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28341)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28448)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28449)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28450)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28451)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28452)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28453)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28454)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28455)
+[2016-11-30 10:46:08 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28456)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28480)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28481)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28482)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28483)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28484)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28485)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28486)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28487)
+[2016-11-30 11:59:22 -0500] [28200] [CRITICAL] WORKER TIMEOUT (pid:28488)
+2016-11-30 12:30:21,071 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 249, in advertisement
+    filter(Participant.workerid == worker_id).\
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2535, in count
+    return self.from_self(col).scalar()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2341, in scalar
+    ret = self.one()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2310, in one
+    ret = list(self)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) no such table: swaps u'SELECT count(*) AS count_1 \nFROM (SELECT swaps.uniqueid AS swaps_uniqueid, swaps.assignmentid AS swaps_assignmentid, swaps.workerid AS swaps_workerid, swaps.hitid AS swaps_hitid, swaps.ipaddress AS swaps_ipaddress, swaps.browser AS swaps_browser, swaps.platform AS swaps_platform, swaps.language AS swaps_language, swaps.cond AS swaps_cond, swaps.counterbalance AS swaps_counterbalance, swaps.codeversion AS swaps_codeversion, swaps.beginhit AS swaps_beginhit, swaps.beginexp AS swaps_beginexp, swaps.endhit AS swaps_endhit, swaps.bonus AS swaps_bonus, swaps.status AS swaps_status, swaps.datastring AS swaps_datastring \nFROM swaps \nWHERE swaps.assignmentid != ? AND swaps.workerid = ?) AS anon_1' (u'debugVULX35', u'debugD86PNU')
+2016-11-30 12:30:28,673 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 365, in start_exp
+    filter(Participant.workerid == worker_id).\
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2241, in all
+    return list(self)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) no such table: swaps u'SELECT swaps.uniqueid AS swaps_uniqueid, swaps.assignmentid AS swaps_assignmentid, swaps.workerid AS swaps_workerid, swaps.hitid AS swaps_hitid, swaps.ipaddress AS swaps_ipaddress, swaps.browser AS swaps_browser, swaps.platform AS swaps_platform, swaps.language AS swaps_language, swaps.cond AS swaps_cond, swaps.counterbalance AS swaps_counterbalance, swaps.codeversion AS swaps_codeversion, swaps.beginhit AS swaps_beginhit, swaps.beginexp AS swaps_beginexp, swaps.endhit AS swaps_endhit, swaps.bonus AS swaps_bonus, swaps.status AS swaps_status, swaps.datastring AS swaps_datastring \nFROM swaps \nWHERE swaps.workerid = ?' (u'debugOE5FSD',)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28784)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28785)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28786)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28787)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28788)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28789)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28790)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28791)
+[2016-11-30 13:02:12 -0500] [28780] [CRITICAL] WORKER TIMEOUT (pid:28792)
+[2016-11-30 13:02:22 -0500] [28891] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-11-30 13:02:22 -0500] [28892] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-11-30 13:02:23 -0500] [28895] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-11-30 13:02:23 -0500] [28893] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-11-30 13:02:23 -0500] [28897] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-11-30 13:02:23 -0500] [28898] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-11-30 13:02:23 -0500] [28896] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-11-30 13:02:23 -0500] [28894] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-11-30 13:02:23 -0500] [28899] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+2016-11-30 14:21:37,610 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 249, in advertisement
+    filter(Participant.workerid == worker_id).\
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2535, in count
+    return self.from_self(col).scalar()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2341, in scalar
+    ret = self.one()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2310, in one
+    ret = list(self)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) no such table: swaps u'SELECT count(*) AS count_1 \nFROM (SELECT swaps.uniqueid AS swaps_uniqueid, swaps.assignmentid AS swaps_assignmentid, swaps.workerid AS swaps_workerid, swaps.hitid AS swaps_hitid, swaps.ipaddress AS swaps_ipaddress, swaps.browser AS swaps_browser, swaps.platform AS swaps_platform, swaps.language AS swaps_language, swaps.cond AS swaps_cond, swaps.counterbalance AS swaps_counterbalance, swaps.codeversion AS swaps_codeversion, swaps.beginhit AS swaps_beginhit, swaps.beginexp AS swaps_beginexp, swaps.endhit AS swaps_endhit, swaps.bonus AS swaps_bonus, swaps.status AS swaps_status, swaps.datastring AS swaps_datastring \nFROM swaps \nWHERE swaps.assignmentid != ? AND swaps.workerid = ?) AS anon_1' (u'debugEV0GE3', u'debug01PGO4')
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29267)
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29268)
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29269)
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29270)
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29271)
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29272)
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29273)
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29274)
+[2016-11-30 15:03:42 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29275)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29462)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29460)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29463)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29464)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29465)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29466)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29467)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29468)
+[2016-11-30 15:36:59 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29461)
+2016-11-30 16:02:24,034 Exception on /get_stims [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 128, in get_stims
+    params["stims"]  = map(int,params["stims"].split(","))
+ValueError: invalid literal for int() with base 10: ''
+2016-11-30 16:02:26,673 Exception on /get_stims [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 128, in get_stims
+    params["stims"]  = map(int,params["stims"].split(","))
+ValueError: invalid literal for int() with base 10: ''
+2016-11-30 16:02:33,642 Exception on /get_stims [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 128, in get_stims
+    params["stims"]  = map(int,params["stims"].split(","))
+ValueError: invalid literal for int() with base 10: ''
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29527)
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29528)
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29525)
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29526)
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29529)
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29530)
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29531)
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29532)
+[2016-11-30 17:34:02 -0500] [29263] [CRITICAL] WORKER TIMEOUT (pid:29533)
