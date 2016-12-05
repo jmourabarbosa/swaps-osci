@@ -367,8 +367,8 @@ var feedback = function(report_pos,report_angle){
 
 	// rotate correct color for this wheel rotation
 	// report angle was rotated on main routine, so also rotating it back
-	correct_angle = circ_dist(correct_color,wheel_offset[session["wheel_n"]])
-	report_angle =  circ_dist(report_angle,wheel_offset[session["wheel_n"]])
+	correct_angle = circ_dist(correct_color,session["wheel_offset"])
+	report_angle =  circ_dist(report_angle,session["wheel_offset"])
 
 
 	screen.insert("text")
@@ -384,13 +384,14 @@ var feedback = function(report_pos,report_angle){
 	feed.setAttribute("fill", fill)
 
 	$('#feedback').addClass('animated '+animation);
+
 	screen.insert("circle")
 		.attr("cx", report_pos[0])
 		.attr("cy", report_pos[1])
 		.attr("r", STIM_SIZE/2)
 		.style("fill", encapsulate_rgb(report_color))
 		.style("stroke", "black")
-		.style("stroke-width","1px")
+		.style("stroke-width","3px")
 		.attr("fill-opacity","1");
 
 	correct_pos = angle2pos(correct_angle,WHEEL_Y/2-21,CENTER)
@@ -400,7 +401,7 @@ var feedback = function(report_pos,report_angle){
 		.attr("r", STIM_SIZE)
 		.style("fill", encapsulate_rgb(angle2rgb(correct_color)))
 		.style("stroke", "black")
-		.style("stroke-width","1px")
+		.style("stroke-width","3px")
 		.attr("fill-opacity","1");
 
 
@@ -535,7 +536,7 @@ var drop_stimuli = function(){
 	}
 }
 
-var draw_wheel = function(screen){
+var draw_wheel2 = function(screen){
 	screen
 		.insert("svg:image")
 		.attr("id","wheel")
@@ -544,6 +545,50 @@ var draw_wheel = function(screen){
 		.attr('width', WHEEL_X)
 		.attr('height', WHEEL_Y)
 		.attr("xlink:href",images[session["wheel_n"]])
+}
+
+function draw_wheel (screen) {
+    var width = width = parseInt(d3.select("#all_stims").style("width"), 10);
+
+    var mySvg = d3.select("#all_stims")
+        
+    var myGroup = mySvg.append("g")
+    	.attr("id","wheel")
+        .attr("transform", "translate(" + (width / 2)  + "," + (width / 2) + ")" );
+
+    var myArc = d3.svg.arc()
+                  .innerRadius(width/2*0.75)
+                  .outerRadius(width/2);
+
+    var numberOfSegments = 180
+
+    var radians;
+    var degrees;
+
+    radians = (Math.PI * 2) / numberOfSegments;
+    degrees = 360 / numberOfSegments;
+
+    var transform = zeros(numberOfSegments,0)
+  
+    myArc.startAngle(function (d,i) { return radians * i } );
+    myArc.endAngle(function (d,i) { return radians * (i + 1) });
+  
+    var segments = myGroup.selectAll("path").data(d3.range(numberOfSegments));
+  
+    segments.enter().append("path");
+  
+    segments.attr('d', myArc)
+        .attr('fill', function(d,i) {
+          rotation = -deg2rad(90)+session["wheel_offset"]+transform[i]
+      	  angle = deg2rad((i) * degrees)
+      	  angle=circ_dist(angle,-rotation)
+
+
+          return "hsl(" + (rad2deg(angle)) + ",100%,50%)";
+        });
+  
+    segments.exit().remove();
+  
 }
 
 var hide_wheel = function(screen){
@@ -591,6 +636,60 @@ var update_stats = function(){
 	$("#total_trials")[0].innerHTML = params["total_trials"]
 	$("#max_reward")[0].innerHTML = params["max_reward"]
 
+}
+
+var color_blind_test = function(next_step){
+	figures =[ "Plate12.gif","Plate15.gif","Plate26.gif",
+				"Plate3.gif","Plate45.gif","Plate7.gif",
+				"Plate8.gif","Plate13.gif","Plate16.gif",
+				"Plate29.gif","Plate42.gif","Plate5.gif",
+				"Plate6.gif","Plate74.gif"];
+
+	figures =[ "Plate12.gif","Plate15.gif","Plate26.gif"]
+
+	figure_codes = [12,15,26,3,45,7,8,13,16,29,42,5,6,74];
+
+	
+	img = document.createElement("IMG");
+	img.setAttribute("id","fig")
+    img.src = "/static/images/color_blind/"+figures[0]
+    question = $("#question").remove()
+    question[0].appendChild(img);
+    input = $("#input")
+    question.append(input)
+
+	root_q = $("#color_test")
+
+	for (i=0;i<figures.length;i++){
+		figure = figures[i]
+		id = "question"+i
+		question =  question.clone()
+		question[0].id = id
+		question[0].childNodes[1].src="/static/images/color_blind/"+figures[i]
+		question[0].childNodes[2].id="input"+i
+		root_q.append(question)
+	}
+
+	$("#next").click(function() {
+		inputs = d3.selectAll("input")[0]
+		pass = true
+		for (i=0;i<inputs.length;i++)
+			pass &= inputs[i].value==figure_codes[i]
+
+		if (pass){
+			next_step()
+		}
+		else{
+
+    psiTurk.saveData({
+            success: function(){
+                psiTurk.computeBonus('compute_bonus', function() {
+                	psiTurk.completeHIT(); // when finished saving compute bonus, the quit
+                }); 
+            }, 
+            });
+		}
+	});
 }
 
 var Questionnaire = function() {

@@ -79,7 +79,7 @@ def validate_stims(stims,center,STIM_SIZE):
 			dist = circdist(pos2angle(pos1,center),pos2angle(pos2,center))
 			dist_c = circdist(color1,color2);
 
-			if  (abs(dist) < MIN_DIST) or (abs(dist_c) < 1.5*CORRECT_THR):
+			if  (abs(dist) < MIN_DIST):
 				return False
 
 	return True

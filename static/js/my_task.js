@@ -22,6 +22,7 @@ var pages = [
 	"instructions/instruct-7.html",
 	"instructions/instruct-8.html",
 	"instructions/instruct-ready.html",
+	"color_blind.html",
 
 	"repeat_task.html",
 	"before_task.html",
@@ -35,13 +36,13 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	"instructions/instruct-1.html",
-	"instructions/instruct-2.html",
-	"instructions/instruct-3.html",
-	"instructions/instruct-5.html",
-	"instructions/instruct-6.html",
-	"instructions/instruct-7.html",
-	"instructions/instruct-8.html",
+	// "instructions/instruct-1.html",
+	// "instructions/instruct-2.html",
+	// "instructions/instruct-3.html",
+	// "instructions/instruct-5.html",
+	// "instructions/instruct-6.html",
+	// "instructions/instruct-7.html",
+	// "instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -69,6 +70,8 @@ var session = {}
 
 // Wheel parameters
 var wheel_offset = [deg2rad(0),deg2rad(90),deg2rad(180),deg2rad(270)];
+var wheel_offset = d3.range(0,2*math.pi,0.1);
+
 SCR_X = 600
 SCR_Y = 600
 WHEEL_X = 600
@@ -156,7 +159,7 @@ var StroopExperiment = function(trials) {
 
 
 		report_angle = pos2angle([report_x,report_y],CENTER);
-		report_angle = circ_dist(report_angle,-wheel_offset[session["wheel_n"]])
+		report_angle = circ_dist(report_angle,-session["wheel_offset"])
 		report_pos = angle2pos(report_angle,250,CENTER);
 		report_on_screen = [report_x,report_y]
 
@@ -188,27 +191,6 @@ var StroopExperiment = function(trials) {
 
 	
 
-	var mouse_down_handler = function(e){
-
-
-		// check if catch trial:
-		// if yes, compute RT and store it
-		if (session["in_catch"]){
-			console.log("catch!")
-			flip_fixation("black")
-			session["catch_rt"].push(new Date().getTime() - session["catch_t"])
-			console.log(session["catch_rt"])
-			session["in_catch"] = 0
-			return
-		}
-
-		// show error somehow
-		session["in_catch"] = 0
-		console.log("wrong click")
-
-		session["catch_false"]++;
-	}
-
 
 
 
@@ -223,7 +205,6 @@ var StroopExperiment = function(trials) {
 			case FIX:
 				screen = start_screen();
 				draw_fix(screen,"black");
-				if (session["catch_trial"]) gen_catches();
 				//gen_catches();
 				session["state"] = PRES;
 				setTimeout(function () {show_trial()},FIX_DUR)
@@ -234,7 +215,6 @@ var StroopExperiment = function(trials) {
 			case PRES:
 				screen = start_screen();
 				draw_fix(screen,"black")
-				$("#fixation").mousedown(mouse_down_handler);
 				draw_stims(screen);
 
 				session["state"] = DELAY;
@@ -255,7 +235,7 @@ var StroopExperiment = function(trials) {
 			// Report
 			case REPORT:
 				session["state"] = FINISH
-				session["wheel_n"] = math.randomInt(0,wheel_offset.length)
+				session["wheel_offset"] = math.random(0,2*math.pi)
 				draw_wheel(screen);
 				session["wheel_on"] = new Date().getTime();
 				blank_stimuli();
@@ -272,7 +252,6 @@ var StroopExperiment = function(trials) {
 	var abort = function(){
 		value = math.round(session["acc_rwd"]*session["max_reward"]+0.5,2)
 		answer = confirm("Do you want to abort with with $"+value+"?");
-		// answer = are_you_sure()
 
 		if (answer) {
 			psiTurk.showPage('thanks.html'); 
@@ -348,6 +327,7 @@ var currentview;
  ******************/
 $(window).load( function(){
 
-	start_test();
-
+	psiTurk.showPage('color_blind.html');
+	color_blind_test(function(){start_test()})
+	
 });

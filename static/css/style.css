@@ -70,6 +70,18 @@ h1 {
   margin-bottom: 30px;
 }
 
+.wheel {
+clear:both;
+margin:0;
+padding:0;
+}
+
+.trial {
+clear:both;
+margin:0;
+padding:0;
+}
+
 /* errors */
 #error img {
   padding-right: 10px;

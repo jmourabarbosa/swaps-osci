@@ -747,3 +747,87 @@ ValueError: invalid literal for int() with base 10: ''
 [2016-12-01 12:09:05 -0500] [32655] [CRITICAL] WORKER TIMEOUT (pid:32665)
 [2016-12-01 12:09:05 -0500] [32655] [CRITICAL] WORKER TIMEOUT (pid:32666)
 [2016-12-01 12:09:05 -0500] [32655] [CRITICAL] WORKER TIMEOUT (pid:32667)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37417)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37418)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37419)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37420)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37421)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37422)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37423)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37424)
+[2016-12-02 18:44:31 -0500] [37413] [CRITICAL] WORKER TIMEOUT (pid:37425)
+2016-12-02 21:59:53,183 Exception on /d [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 683, in regularpage
+    return render_template(pagename)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: d
+2016-12-02 22:00:56,598 Exception on /d [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 683, in regularpage
+    return render_template(pagename)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: d
+2016-12-02 22:01:38,308 Exception on /d [GET]
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 683, in regularpage
+    return render_template(pagename)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: d

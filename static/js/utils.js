@@ -1,6 +1,12 @@
 CORRECT = 0
 CATCH=1
 
+function zeros(len,d){
+	a=[]
+  while(len>0){a.push(d);len--}
+  return a;
+};
+
 
 function AssertException(message) { this.message = message; }
 AssertException.prototype.toString = function () {
@@ -21,6 +27,18 @@ function boolpercent(arr) {
 	}
 	return 100* count / arr.length;
 }
+
+function range(start, stop, step){
+  var a=[start], b=start;
+  while(b<stop){b+=step;a.push(b)}
+  return a;
+};
+
+function zeros(len,d){
+	a=[]
+  while(len>0){a.push(d);len--}
+  return a;
+};
 
 
 var angle2pos = function (angle,R,center){
@@ -90,3 +108,5 @@ var rgb2angle = function(rgb){
 	}
 	return angle
 }
+
+
