@@ -831,3 +831,507 @@ Traceback (most recent call last):
   File "/Users/zorba/anaconda2/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
     raise TemplateNotFound(template)
 TemplateNotFound: d
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45634)
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45635)
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45636)
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45637)
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45638)
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45639)
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45640)
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45641)
+[2016-12-05 18:54:23 -0500] [45630] [CRITICAL] WORKER TIMEOUT (pid:45642)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45938)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45939)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45940)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45941)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45942)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45943)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45944)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45945)
+[2016-12-05 19:45:51 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45946)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45984)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45985)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45986)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45987)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45988)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45989)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45981)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45982)
+[2016-12-05 20:07:06 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:45983)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46034)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46035)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46036)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46037)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46038)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46039)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46040)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46041)
+[2016-12-05 20:09:46 -0500] [45934] [CRITICAL] WORKER TIMEOUT (pid:46042)
+[2016-12-06 00:19:16 -0500] [46561] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:16 -0500] [46562] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:16 -0500] [46563] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:16 -0500] [46565] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:16 -0500] [46566] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:16 -0500] [46564] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:16 -0500] [46568] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:16 -0500] [46567] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:16 -0500] [46569] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:59 -0500] [46641] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:19:59 -0500] [46642] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:20:00 -0500] [46643] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:20:00 -0500] [46644] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:20:00 -0500] [46645] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:20:00 -0500] [46646] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:20:00 -0500] [46647] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:20:00 -0500] [46648] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 00:20:00 -0500] [46649] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/arbiter.py", line 557, in spawn_worker
+    worker.init_process()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 126, in init_process
+    self.load_wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/workers/base.py", line 136, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/Users/zorba/anaconda2/lib/python2.7/site-packages/psiturk/experiment.py", line 72, in <module>
+    from custom import custom_code
+  File "/Users/zorba/Dropbox/Neuro/psiturk/Swaps-no-fix/custom.py", line 29, in <module>
+    all_trials = load(f)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 1384, in load
+    return Unpickler(file).load()
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 864, in load
+    dispatch[key](self)
+  File "/Users/zorba/anaconda2/lib/python2.7/pickle.py", line 886, in load_eof
+    raise EOFError
+EOFError
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47636)
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47637)
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47638)
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47639)
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47640)
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47641)
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47642)
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47643)
+[2016-12-06 13:24:44 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47644)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47755)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47756)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47757)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47758)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47759)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47760)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47761)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47762)
+[2016-12-06 14:07:21 -0500] [47632] [CRITICAL] WORKER TIMEOUT (pid:47763)

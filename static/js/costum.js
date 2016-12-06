@@ -1,3 +1,23 @@
+norm = [-0.287209  , -0.42802111, -0.5593022 , -0.58103565, -0.58222462,
+       -0.62957638, -0.11111111, -0.2616    , -0.57386667, -0.22222222,
+       -0.43333333, -0.21111111, -0.44222222, -0.34333333, -0.188     ,
+       -0.51503111, -0.30999   , -0.43120011, -0.47623112, -0.32463422,
+       -0.33356667, -0.45236778, -0.21222222, -0.33333333, -0.23844444,
+       -0.31555556, -0.1592    , -0.39911111, -0.45102222, -0.46788889,
+       -0.31912111, -0.47623678, -0.22208778, -0.45329679, -0.1       ,
+       -0.22333333,  0.        ]
+norm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+norm = [0, 0.6, 0.5, 0.2, 0, 0, -0.4, -1, -1.4, -1.5, -1.5, -1.1, -0.1, 0.6, 0.9, 1, 1, 0.7, 0.5, 0.3, 0.3, 0.1, 0.1, -0.1, 1.2, 0.9, 0.5, 0.3, 0.3, 0.2, -0.2, -0.3, -0.5, -0.6, -0.6, -0.4, 0]
+function get_norm(prop,step){
+	i_norm = math.floor(prop * norm.length)
+
+	//return 0
+	return norm[i_norm]*step
+
+
+}
+
+
 function compute_factor(){
 
 	params = session["params"]
@@ -54,11 +74,11 @@ var default_params = function (type){
 	if (type) { 
 	    params["n_trials"] = 1
 	    params["stims"] = [1,3]
-	    params["delays"] = [1]
+	    params["delays"] = [0,3]
     }
     else {
 	    params["n_trials"] = 5
-		params["stims"] = [2,3,4,5]
+		params["stims"] = [1,3,5,7]
 		params["delays"] = [0,3]
 	}
 
@@ -370,7 +390,6 @@ var feedback = function(report_pos,report_angle){
 	correct_angle = circ_dist(correct_color,session["wheel_offset"])
 	report_angle =  circ_dist(report_angle,session["wheel_offset"])
 
-
 	screen.insert("text")
 		.attr("x",center[0])
 		.attr("y", center[0])
@@ -560,7 +579,7 @@ function draw_wheel (screen) {
                   .innerRadius(width/2*0.75)
                   .outerRadius(width/2);
 
-    var numberOfSegments = 180
+    var numberOfSegments = 360
 
     var radians;
     var degrees;
@@ -579,10 +598,11 @@ function draw_wheel (screen) {
   
     segments.attr('d', myArc)
         .attr('fill', function(d,i) {
-          rotation = -deg2rad(90)+session["wheel_offset"]+transform[i]
+      		//console.log(i,numberOfSegments)
+          rotation = -deg2rad(90)+session["wheel_offset"]
       	  angle = deg2rad((i) * degrees)
       	  angle=circ_dist(angle,-rotation)
-
+      	  angle=circ_dist(angle,-get_norm(angle2pi(angle)/(2*math.pi),radians))
 
           return "hsl(" + (rad2deg(angle)) + ",100%,50%)";
         });
@@ -634,20 +654,24 @@ var update_stats = function(){
 	parms = default_params()
 
 	$("#total_trials")[0].innerHTML = params["total_trials"]
+	$("#total_duration")[0].innerHTML = math.floor(params["total_trials"]/80*10)+1
 	$("#max_reward")[0].innerHTML = params["max_reward"]
+	
+	tr=d3.selectAll("#total_reward")[0]
+	for (i=0;i<tr.length;i++)
+		tr[i].innerHTML = session["total_reward"]
+
 
 }
 
 var color_blind_test = function(next_step){
 	figures =[ "Plate12.gif","Plate15.gif","Plate26.gif",
 				"Plate3.gif","Plate45.gif","Plate7.gif",
-				"Plate8.gif","Plate13.gif","Plate16.gif",
+				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
 				"Plate6.gif","Plate74.gif"];
 
-	figures =[ "Plate12.gif","Plate15.gif","Plate26.gif"]
-
-	figure_codes = [12,15,26,3,45,7,8,13,16,29,42,5,6,74];
+	figure_codes = [12,15,26,3,45,7,8,16,29,42,5,6,74];
 
 	
 	img = document.createElement("IMG");
@@ -675,6 +699,7 @@ var color_blind_test = function(next_step){
 		pass = true
 		for (i=0;i<inputs.length;i++)
 			pass &= inputs[i].value==figure_codes[i]
+			console.log(i,pass)
 
 		if (pass){
 			next_step()

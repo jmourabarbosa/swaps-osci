@@ -17,10 +17,13 @@ STIM_SIZE=20
 RADIUS = WHEEL_Y/3.2
 CORRECT_THR=0.5
 CORRECT=0
+MIN_DIST = 0.6
+
 
 
 
 def gen_trials(total_trials,n_stims):
+	print n_stims
 
 	trials = []
 
@@ -33,12 +36,21 @@ def gen_trials(total_trials,n_stims):
 	return array(trials);
 
 def gen_stim(n_stims,center,R,STIM_SIZE):
+	min_dst = 2*pi/n_stims
+	assert min_dst > MIN_DIST
 
-	stims = []
+
+	stims =[]
 	while not validate_stims(stims,center,STIM_SIZE):
-		stims = []
-		for i in range(n_stims):
-			angle  = random()*2*pi
+		dists = random(n_stims)*(min_dst-MIN_DIST)
+		angle  = dists[0]
+		prev = angle
+		color = random()*2*pi
+		pos = angle2pos(angle,R,center);
+		stims = [{'correct': 0,'pos_angle': angle,"pos_x": pos[0]+STIM_SIZE, "pos_y": pos[1]+STIM_SIZE, "color": color}]
+		for i in range(1,n_stims):
+			angle  = prev+dists[i]+MIN_DIST
+			prev = angle
 			color = random()*2*pi
 			pos = angle2pos(angle,R,center);
 			stims+=[{'correct': 0,'pos_angle': angle,"pos_x": pos[0]+STIM_SIZE, "pos_y": pos[1]+STIM_SIZE, "color": color}]
@@ -63,9 +75,6 @@ def pos2angle(pos,center):
 
 
 def validate_stims(stims,center,STIM_SIZE):
-
-	MIN_DIST = CORRECT_THR*.5
-
 	if len(stims) < 1:
 		return False
 
@@ -91,7 +100,7 @@ seed(96)
 # seed(int(time.time()))
 
 num_cores = multiprocessing.cpu_count()
-all_trials = Parallel(n_jobs=num_cores)(delayed(gen_trials)(1000,n) for n in range(1,9))
+all_trials = Parallel(n_jobs=num_cores)(delayed(gen_trials)(1000,n) for n in range(1,10))
 
 f = open("all_trials.pickle","w")
 dump(all_trials,f)

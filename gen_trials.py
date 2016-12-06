@@ -61,7 +61,7 @@ def pos2angle(pos,center):
 
 def validate_stims(stims,center,STIM_SIZE):
 
-	MIN_DIST = CORRECT_THR
+	MIN_DIST = STIM_SIZE*1.1
 
 	if len(stims) < 1:
 		return False

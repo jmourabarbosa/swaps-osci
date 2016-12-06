@@ -19,7 +19,7 @@ var pages = [
 	// "instructions/instruct-4.html",
 	"instructions/instruct-5.html",
 	"instructions/instruct-6.html",
-	"instructions/instruct-7.html",
+	// "instructions/instruct-7.html",
 	"instructions/instruct-8.html",
 	"instructions/instruct-ready.html",
 	"color_blind.html",
@@ -36,13 +36,12 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	// "instructions/instruct-1.html",
-	// "instructions/instruct-2.html",
-	// "instructions/instruct-3.html",
-	// "instructions/instruct-5.html",
-	// "instructions/instruct-6.html",
-	// "instructions/instruct-7.html",
-	// "instructions/instruct-8.html",
+	"instructions/instruct-1.html",
+	"instructions/instruct-2.html",
+	"instructions/instruct-3.html",
+	"instructions/instruct-5.html",
+	"instructions/instruct-6.html",
+	"instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -115,6 +114,8 @@ WHITE=0
 BLACK=1
 FIX_SIZE = 20
 
+MAX_RWD = 15
+
 
 /************************
 * SWAP ERROR EXPERIMENT *
@@ -160,6 +161,9 @@ var StroopExperiment = function(trials) {
 
 		report_angle = pos2angle([report_x,report_y],CENTER);
 		report_angle = circ_dist(report_angle,-session["wheel_offset"])
+		report_angle=circ_dist(report_angle,-get_norm(angle2pi(report_angle)/(2*math.pi),(Math.PI * 2) / 180))
+
+
 		report_pos = angle2pos(report_angle,250,CENTER);
 		report_on_screen = [report_x,report_y]
 
@@ -174,8 +178,8 @@ var StroopExperiment = function(trials) {
 									'report_pos': report_pos,
 									'report_on_screen': report_on_screen,
 									'n_drop': session["n_drop"],
-									'trial': JSON.stringify(session["trial"])
-									//'session': JSON.stringify(session)
+									'trial': JSON.stringify(session["trial"]),
+									'session': JSON.stringify(session)
                                });
 
 		feedback(report_on_screen,report_angle)
@@ -183,7 +187,7 @@ var StroopExperiment = function(trials) {
 		// reset session variables
 		session_init()
 		session["trial_number"]++;
-		hide_wheel()
+		//hide_wheel()
 		nanobar()
 		setTimeout(function () {next()},FEED_DUR)
 	};
@@ -240,8 +244,9 @@ var StroopExperiment = function(trials) {
 				session["wheel_on"] = new Date().getTime();
 				blank_stimuli();
 				bold_correct(screen);
-				$("#all_stims").click(response_handler);
 				session["listening"] = 1;
+				$("#all_stims").click(response_handler);
+
 				//window.requestAnimationFrame(flicker_correct)
 				break;
 		}
@@ -250,12 +255,15 @@ var StroopExperiment = function(trials) {
 	};
 
 	var abort = function(){
-		value = math.round(session["acc_rwd"]*session["max_reward"]+0.5,2)
-		answer = confirm("Do you want to abort with with $"+value+"?");
+		// current accumulated money, minus penalty of 1$, plust 50cent minimum
+		value = math.round(session["acc_rwd"]*session["max_reward"]+0.5-1,2)
+		//answer = confirm("Do you want to abort with a penalty of $1 and leave with with $"+value+"?");
+		answer = confirm("If you choose to abort, send the code "+uniqueId+" to me by email, please");
 
 		if (answer) {
 			psiTurk.showPage('thanks.html'); 
 			currentview = new Questionnaire();
+			session["total_reward"] = session["acc_rwd"]*session["max_reward"]+0.5-1
 		}
 	}
 
@@ -264,12 +272,22 @@ var StroopExperiment = function(trials) {
 
 		case TASK:
 			psiTurk.showPage('repeat_task.html');
-			$("#repeat").click(function () { gen_trials2(params,exp_callback)});
-			$("#finish").click(function () { psiTurk.showPage('thanks.html'); currentview = new Questionnaire();});
+			session["total_reward"] = session["acc_rwd"]*session["max_reward"]+0.5
+
+			update_stats()
+			$("#repeat").click(function () { 
+				session["max_reward"] = math.min(MAX_RWD,session["max_reward"]+1.5)
+				gen_trials2(params,exp_callback)
+			});
+			$("#finish").click(function () {
+				psiTurk.showPage('thanks.html');
+				answer = confirm("Don't forget to send the code "+uniqueId+" to me by email, please");
+				currentview = new Questionnaire();});
 			break;
 
 		case TEST:
 			psiTurk.showPage('before_task.html');
+
 			update_stats();
 			$("#repeat").click(start_test);
 			$("#begin").click(function () {
@@ -302,6 +320,7 @@ var StroopExperiment = function(trials) {
 	session["factor"] = compute_factor()
 
 	$("#abort").click(function () { abort()});
+
 
 	// Start the experiment
 	next();
