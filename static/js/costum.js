@@ -73,7 +73,7 @@ function compute_rwd(dist){
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 10
+	params["max_reward"] = 5
 
 	if (type) { 
 	    params["n_trials"] = 1
@@ -373,6 +373,7 @@ var feedback = function(report_pos,report_angle){
 	correct_color = correct["color"]
 	correct_pos = angle2pos(correct_color,WHEEL_Y/2-21,CENTER)
 	dist = math.abs(circ_dist(report_angle, correct_color))
+	console.log(session["total_reward"])
 
 	if (dist > math.pi/2){
 
