@@ -36,12 +36,12 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	// "instructions/instruct-1.html",
-	// "instructions/instruct-2.html",
-	// "instructions/instruct-3.html",
-	// "instructions/instruct-5.html",
-	// "instructions/instruct-6.html",
-	// "instructions/instruct-8.html",
+	"instructions/instruct-1.html",
+	"instructions/instruct-2.html",
+	"instructions/instruct-3.html",
+	"instructions/instruct-5.html",
+	"instructions/instruct-6.html",
+	"instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -114,7 +114,9 @@ WHITE=0
 BLACK=1
 FIX_SIZE = 20
 
-MAX_RWD = 15
+MAX_RWD = 20
+
+N_SEGS = 360
 
 
 /************************
@@ -161,8 +163,6 @@ var StroopExperiment = function(trials) {
 
 		report_angle = pos2angle([report_x,report_y],CENTER);
 		report_angle = circ_dist(report_angle,-session["wheel_offset"])
-		report_angle=circ_dist(report_angle,-get_norm(angle2pi(report_angle)/(2*math.pi),(Math.PI * 2) / 180))
-
 
 		report_pos = angle2pos(report_angle,250,CENTER);
 		report_on_screen = [report_x,report_y]
@@ -263,7 +263,7 @@ var StroopExperiment = function(trials) {
 		if (answer) {
 			psiTurk.showPage('thanks.html'); 
 			currentview = new Questionnaire();
-			session["total_reward"] = session["total_reward"]+0.5-1
+			session["total_reward"] = math.max(0.5,session["total_reward"]+0.5-1)
 		}
 	}
 
@@ -276,7 +276,7 @@ var StroopExperiment = function(trials) {
 
 			update_stats()
 			$("#repeat").click(function () { 
-				session["max_reward"] = math.min(MAX_RWD,session["max_reward"]+1.5)
+				session["max_reward"] = math.min(MAX_RWD,session["max_reward"]+1)
 				gen_trials2(params,exp_callback)
 			});
 			$("#finish").click(function () {

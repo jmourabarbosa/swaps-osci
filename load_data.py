@@ -171,8 +171,6 @@ for load in range(1,max(unique(loads))+1):
 	NT_hide+=[amap(to_pi,nt_c[idx & ~c])]
 
 
-
-
 X_hide=array(X_hide)
 T_hide =array(T_hide)
 NT_hide =array(NT_hide)

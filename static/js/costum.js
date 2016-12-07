@@ -8,6 +8,7 @@ norm = [-0.287209  , -0.42802111, -0.5593022 , -0.58103565, -0.58222462,
        -0.22333333,  0.        ]
 norm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 norm = [0, 0.6, 0.5, 0.2, 0, 0, -0.4, -1, -1.4, -1.5, -1.5, -1.1, -0.1, 0.6, 0.9, 1, 1, 0.7, 0.5, 0.3, 0.3, 0.1, 0.1, -0.1, 1.2, 0.9, 0.5, 0.3, 0.3, 0.2, -0.2, -0.3, -0.5, -0.6, -0.6, -0.4, 0]
+
 function get_norm(prop,step){
 	i_norm = math.floor(prop * norm.length)
 
@@ -17,6 +18,15 @@ function get_norm(prop,step){
 
 }
 
+function stretch(angle){
+	angle=circ_dist(angle,-get_norm(angle2pi(angle)/(2*math.pi),(Math.PI * 2) / N_SEGS))
+	return angle
+}
+
+function unstretch(angle){
+	angle=circ_dist(angle,get_norm(angle2pi(angle)/(2*math.pi),(Math.PI * 2) / N_SEGS))
+	return angle
+}
 
 function compute_factor(){
 
@@ -73,7 +83,7 @@ function compute_rwd(dist){
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 5
+	params["max_reward"] = 1
 
 	if (type) { 
 	    params["n_trials"] = 1
@@ -81,7 +91,7 @@ var default_params = function (type){
 	    params["delays"] = [1]
     }
     else {
-	    params["n_trials"] = 5
+	    params["n_trials"] = 1
 		params["stims"] = [1,3,5,6]
 		params["delays"] = [0,3]
 	}
@@ -364,35 +374,42 @@ var session_init=function(){
 
 
 var feedback = function(report_pos,report_angle){
+
+	report_angle = stretch(report_angle)
 	hide_stimulus()
 
 	max_rwd = session["factor"]*session["n_stims"]*session["max_reward"]
 
 	report_color = angle2rgb(report_angle);
 	correct = session["trial"][session['correct']];
-	correct_color = correct["color"]
+	correct_color = stretch(correct["color"])
 	correct_pos = angle2pos(correct_color,WHEEL_Y/2-21,CENTER)
 	dist = math.abs(circ_dist(report_angle, correct_color))
 	console.log(session["total_reward"])
 
 	if (dist > math.pi/2){
 
-		feed_text = "$0"
+		feed_text = "0¢"
 		fill = "#FA5858"
 		animation="fadeOutDown"
+
 		center = [CENTER[0]-40,CENTER[1]-80]
 
 	}
 	else{
+		center = [CENTER[0]-80,CENTER[1]-80]
+		rwd_amount = math.max(compute_rwd(dist)*max_rwd,0.01)
+		feed_text = math.round(rwd_amount*100)+"¢"
+		if (session["phase"] == TEST){
+			center = [CENTER[0]-80,CENTER[1]-80]
+			feed_text = "correct"
+		}
 
-		rwd_amount = math.max(math.round(compute_rwd(dist)*max_rwd,2),0.01)
-		feed_text = "$"+rwd_amount
 		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
 		session["total_reward"] += rwd_amount
 		fill ="#58FA58"
 		session["n_correct"]++
 		animation="fadeOutUp"
-		center = [CENTER[0]-80,CENTER[1]-80]
 	}
 
 	// rotate correct color for this wheel rotation
@@ -495,7 +512,7 @@ var draw_stims=function(screen){
 			.attr("cx", stim['pos_x']-STIM_SIZE)
 			.attr("cy", stim['pos_y']-STIM_SIZE)
 			.attr("r", STIM_SIZE)
-			.style("fill", encapsulate_rgb(angle2rgb(stim['color'])))
+			.style("fill", encapsulate_rgb(angle2rgb(stretch(stim['color']))))
 			.style("stroke", "black")
 			.style("stroke-width","0px")
 			.attr("fill-opacity","1")
@@ -592,7 +609,7 @@ function draw_wheel (screen) {
                   .innerRadius(width/2*0.75)
                   .outerRadius(width/2);
 
-    var numberOfSegments = 360
+    var numberOfSegments = N_SEGS
 
     var radians;
     var degrees;
@@ -615,8 +632,7 @@ function draw_wheel (screen) {
           rotation = -deg2rad(90)+session["wheel_offset"]
       	  angle = deg2rad((i) * degrees)
       	  angle=circ_dist(angle,-rotation)
-      	  angle=circ_dist(angle,-get_norm(angle2pi(angle)/(2*math.pi),radians))
-
+      	  angle=stretch(angle)
           return "hsl(" + (rad2deg(angle)) + ",100%,50%)";
         });
   
@@ -683,7 +699,7 @@ var color_blind_test = function(next_step){
 				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
 				"Plate6.gif","Plate74.gif"];
-	figures =[ "Plate12.gif"]
+	//figures =[ "Plate12.gif"]
 
 	figure_codes = [12,15,26,3,45,7,8,16,29,42,5,6,74];
 
