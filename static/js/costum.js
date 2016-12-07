@@ -83,7 +83,7 @@ function compute_rwd(dist){
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 1
+	params["max_reward"] = 10
 
 	if (type) { 
 	    params["n_trials"] = 1
@@ -698,10 +698,10 @@ var color_blind_test = function(next_step){
 				"Plate3.gif","Plate45.gif","Plate7.gif",
 				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
-				"Plate6.gif","Plate74.gif"];
+				"Plate6.gif"];
 	//figures =[ "Plate12.gif"]
 
-	figure_codes = [12,15,26,3,45,7,8,16,29,42,5,6,74];
+	figure_codes = [12,15,26,3,45,7,8,16,29,42,5,6];
 
 	
 	img = document.createElement("IMG");

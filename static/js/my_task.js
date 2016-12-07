@@ -257,8 +257,8 @@ var StroopExperiment = function(trials) {
 	var abort = function(){
 		// current accumulated money, minus penalty of 1$, plust 50cent minimum
 		value = math.round(session["acc_rwd"]*session["max_reward"]+0.5-1,2)
-		//answer = confirm("Do you want to abort with a penalty of $1 and leave with with $"+value+"?");
-		answer = confirm("If you choose to abort, send the code "+uniqueId+" to me by email, please");
+		answer = confirm("Do you want to abort with a penalty of $1 and leave with with $"+value+"?");
+		//answer = confirm("If you choose to abort, send the code "+uniqueId+" to me by email, please");
 
 		if (answer) {
 			psiTurk.showPage('thanks.html'); 
@@ -281,7 +281,7 @@ var StroopExperiment = function(trials) {
 			});
 			$("#finish").click(function () {
 				psiTurk.showPage('thanks.html');
-				answer = confirm("Don't forget to send the code "+uniqueId+" to me by email, please");
+				//answer = confirm("Don't forget to send the code "+uniqueId+" to me by email, please");
 				currentview = new Questionnaire();});
 			break;
 
@@ -311,7 +311,7 @@ var StroopExperiment = function(trials) {
 	session['start_time'] = Date.now()
 	session['acc_rwd'] = 0
 	session["bar"] = undefined
-	session["max_reward"] = 15
+	session["max_reward"] = params["max_reward"]
 	session["total_reward"] = 0
 	session_init();
 
