@@ -66,10 +66,14 @@ var nanobar = function(){
 	return session["bar"]
 }
 
+function compute_rwd(dist){
+	rwd = 1/math.exp(dist**2)
+	return rwd
+}
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 10
+	params["max_reward"] = 15
 
 	if (type) { 
 	    params["n_trials"] = 1
@@ -362,13 +366,16 @@ var session_init=function(){
 var feedback = function(report_pos,report_angle){
 	hide_stimulus()
 
+	max_rwd = math.round(session["factor"]*session["n_stims"]*session["max_reward"],2)
 
 	report_color = angle2rgb(report_angle);
 	correct = session["trial"][session['correct']];
 	correct_color = correct["color"]
 	correct_pos = angle2pos(correct_color,WHEEL_Y/2-21,CENTER)
+	dist = math.abs(circ_dist(report_angle, correct_color))
 
-	if (math.abs(circ_dist(report_angle, correct_color)) > CORRECT_THR){
+	if (dist > math.pi/2){
+
 		feed_text = "$0"
 		fill = "#FA5858"
 		animation="fadeOutDown"
@@ -376,12 +383,12 @@ var feedback = function(report_pos,report_angle){
 
 	}
 	else{
-		feed_text = "$"+math.round(session["factor"]*session["n_stims"]*session["max_reward"],2)
+
+		feed_text = "$"+math.round(compute_rwd(dist)*max_rwd,2)
+		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"] 
 		fill ="#58FA58"
 		session["n_correct"]++
-		session["acc_rwd"] += session["factor"]*session["n_stims"] 
 		animation="fadeOutUp"
-
 		center = [CENTER[0]-80,CENTER[1]-80]
 	}
 
@@ -670,6 +677,7 @@ var color_blind_test = function(next_step){
 				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
 				"Plate6.gif","Plate74.gif"];
+	figures =[ "Plate12.gif"]
 
 	figure_codes = [12,15,26,3,45,7,8,16,29,42,5,6,74];
 

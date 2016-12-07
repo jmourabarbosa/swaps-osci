@@ -10,6 +10,7 @@ from scipy.io import savemat
 
 
 db_url = "sqlite:///participants.db"
+db_url = "sqlite:///genis.db"
 table_name = 'swaps'
 data_column_name = 'datastring'
 # boilerplace sqlalchemy setup
@@ -66,7 +67,7 @@ for r in rows:
 		trials_data = get_trials_data(data)
 		all_trials[workerID] = filter_data(trials_data)
 
-good_workers = [all_trials.keys()[5]]
+good_workers = [all_trials.keys()[1]]
 
 X=[]
 T_c=[]
