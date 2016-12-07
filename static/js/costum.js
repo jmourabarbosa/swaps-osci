@@ -67,13 +67,13 @@ var nanobar = function(){
 }
 
 function compute_rwd(dist){
-	rwd = 1/math.exp(2*dist**4)
+	rwd = 1/math.exp(2*dist)
 	return rwd
 }
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 8
+	params["max_reward"] = 10
 
 	if (type) { 
 	    params["n_trials"] = 1
