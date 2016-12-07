@@ -67,22 +67,22 @@ var nanobar = function(){
 }
 
 function compute_rwd(dist){
-	rwd = 1/math.exp(dist**2)
+	rwd = 1/math.exp(2*dist**4)
 	return rwd
 }
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 15
+	params["max_reward"] = 8
 
 	if (type) { 
 	    params["n_trials"] = 1
-	    params["stims"] = [1,3]
-	    params["delays"] = [0,3]
+	    params["stims"] = [1,2]
+	    params["delays"] = [1]
     }
     else {
 	    params["n_trials"] = 5
-		params["stims"] = [1,3,5,7]
+		params["stims"] = [1,3,5,6]
 		params["delays"] = [0,3]
 	}
 
@@ -366,7 +366,7 @@ var session_init=function(){
 var feedback = function(report_pos,report_angle){
 	hide_stimulus()
 
-	max_rwd = math.round(session["factor"]*session["n_stims"]*session["max_reward"],2)
+	max_rwd = session["factor"]*session["n_stims"]*session["max_reward"]
 
 	report_color = angle2rgb(report_angle);
 	correct = session["trial"][session['correct']];
@@ -384,8 +384,10 @@ var feedback = function(report_pos,report_angle){
 	}
 	else{
 
-		feed_text = "$"+math.round(compute_rwd(dist)*max_rwd,2)
-		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"] 
+		rwd_amount = math.max(math.round(compute_rwd(dist)*max_rwd,2),0.01)
+		feed_text = "$"+rwd_amount
+		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
+		session["total_reward"] += rwd_amount
 		fill ="#58FA58"
 		session["n_correct"]++
 		animation="fadeOutUp"
@@ -477,6 +479,9 @@ var get_correct = function(){
 var bold_correct= function(screen){
 	stim = d3.select("#all_stims").select("#stim"+session["correct"])[0][0]
 	stim.setAttribute("style","fill: black")
+	// c=session["trial"][session["correct"]]["color"]
+	// stim.setAttribute("style","fill: "+encapsulate_rgb(angle2rgb(c)))
+
 
 }
 
@@ -656,7 +661,7 @@ var update_stats = function(){
 	// In every entry of reward, change it to the actual performance.
 	rws=d3.selectAll("#reward")[0]
 	for (i=0;i<rws.length;i++)
-		rws[i].innerHTML = session["acc_rwd"]*100
+		rws[i].innerHTML = math.round(session["acc_rwd"]*100,2)
 
 	parms = default_params()
 
@@ -666,7 +671,7 @@ var update_stats = function(){
 	
 	tr=d3.selectAll("#total_reward")[0]
 	for (i=0;i<tr.length;i++)
-		tr[i].innerHTML = session["total_reward"]
+		tr[i].innerHTML = math.round(session["total_reward"],2)
 
 
 }

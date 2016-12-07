@@ -8,9 +8,12 @@ from circ_stats import *
 from scipy.io import savemat
 
 
+maxi = "debug0mip6"
+genis = "debugniQER"
+david = "debugr7vsw"
 
 db_url = "sqlite:///participants.db"
-db_url = "sqlite:///genis.db"
+db_url = "sqlite:///max.db"
 table_name = 'swaps'
 data_column_name = 'datastring'
 # boilerplace sqlalchemy setup
@@ -24,6 +27,11 @@ rows = s.execute()
 rs = []
 ds = []
 
+def to_pi(angles):
+	angles = array(angles)
+	idx = angles>pi
+	angles[idx] = angles[idx]-2*pi
+	return angles
 
 # filter subjects with no real experiment
 def get_trials_data(data):
@@ -67,7 +75,7 @@ for r in rows:
 		trials_data = get_trials_data(data)
 		all_trials[workerID] = filter_data(trials_data)
 
-good_workers = [all_trials.keys()[1]]
+good_workers = [genis,david]
 
 X=[]
 T_c=[]
@@ -109,14 +117,14 @@ for wid in good_workers:
 	C.append(c)
 
 
-x=array(x)
-t_c = array(t_c)
-t_p = array(t_p)
-nt_c = array(nt_c)
-nt_p = array(nt_p)
-c=array(c)
-d=array(d)
-
+x=concatenate(X)
+t_c = concatenate(T_c)
+t_p = concatenate(T_p)
+nt_c = concatenate(NT_c)
+nt_p = concatenate(NT_p)
+c=concatenate(C)
+d=concatenate(D)
+c=c==1
 
 
 X_show =[]
@@ -127,32 +135,52 @@ X_hide =[]
 T_hide =[]
 NT_hide =[]
 
-nt_idx = amap(len,nt_c)>0
+# colapsing all loads
+# nt_idx = amap(len,nt_c) >0
+# for i,nt in enumerate(nt_c[nt_idx]):
+# 	dist_to_nt = abs(circdist(x[nt_idx][i],nt))
+# 	close = argsort(dist_to_nt)[0]
+# 	X_show.append(x[nt_idx][i])
+# 	T_show.append(t_c[nt_idx][i])
+# 	NT_show.append(nt[close])
 
-for i,nt in enumerate(nt_c[nt_idx & c ]):
-	for nt1 in nt:
-		X_show.append(x[i])
-		T_show.append(t_c[i])
-		NT_show.append(nt1)
+# c = c[nt_idx]
+# X_show = array(X_show)
+# T_show = array(T_show)
+# NT_show = array(NT_show)
 
-for i,nt in enumerate(nt_c[nt_idx & (~c)]):
-	for nt1 in nt:
-		X_hide.append(x[i])
-		T_hide.append(t_c[i])
-		NT_hide.append(nt1)
-def to_pi(angles):
-	idx = angles>pi
-	angles[idx] = angles[idx]-2*pi
-	return angles
+# X_hide = X_show[c==0]
+# T_hide = T_show[c==0]
+# NT_hide =NT_show[c==0]
+
+
+# X_show = X_show[c==1]
+# T_show = T_show[c==1]
+# NT_show =NT_show[c==1]
+
+
+c=c==1
+loads = amap(len,nt_c)
+for load in range(1,max(unique(loads))+1):
+	idx = load == loads
+	X_show+=[x[idx & c]]
+	X_hide+=[x[idx & ~c]]
+	T_show+=[amap(to_pi,t_c[idx & c])]
+	T_hide+=[amap(to_pi,t_c[idx & ~c])]
+	NT_show+=[amap(to_pi,nt_c[idx & c])]
+	NT_hide+=[amap(to_pi,nt_c[idx & ~c])]
+
+
+
 
 X_hide=array(X_hide)
-T_hide = to_pi(array(T_hide))
-NT_hide = to_pi(array(NT_hide))
+T_hide =array(T_hide)
+NT_hide =array(NT_hide)
 hide_d = {"X": X_hide, "T": T_hide, "NT": NT_hide}
 
 X_show = array(X_show)
-T_show = to_pi(array(T_show))
-NT_show = to_pi(array(NT_show))
+T_show = array(T_show)
+NT_show = array(NT_show)
 show_d = {"X": X_show, "T": T_show, "NT": NT_show}
 
 savemat("show_d.mat",show_d)

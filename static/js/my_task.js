@@ -36,12 +36,12 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	"instructions/instruct-1.html",
-	"instructions/instruct-2.html",
-	"instructions/instruct-3.html",
-	"instructions/instruct-5.html",
-	"instructions/instruct-6.html",
-	"instructions/instruct-8.html",
+	// "instructions/instruct-1.html",
+	// "instructions/instruct-2.html",
+	// "instructions/instruct-3.html",
+	// "instructions/instruct-5.html",
+	// "instructions/instruct-6.html",
+	// "instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -263,7 +263,7 @@ var StroopExperiment = function(trials) {
 		if (answer) {
 			psiTurk.showPage('thanks.html'); 
 			currentview = new Questionnaire();
-			session["total_reward"] = session["acc_rwd"]*session["max_reward"]+0.5-1
+			session["total_reward"] = session["total_reward"]+0.5-1
 		}
 	}
 
@@ -272,7 +272,7 @@ var StroopExperiment = function(trials) {
 
 		case TASK:
 			psiTurk.showPage('repeat_task.html');
-			session["total_reward"] = session["acc_rwd"]*session["max_reward"]+0.5
+			session["total_reward"] = session["total_reward"]+0.5
 
 			update_stats()
 			$("#repeat").click(function () { 
@@ -311,7 +311,7 @@ var StroopExperiment = function(trials) {
 	session['start_time'] = Date.now()
 	session['acc_rwd'] = 0
 	session["bar"] = undefined
-	session["max_reward"] = 5
+	session["max_reward"] = 15
 	session_init();
 
 	// Load the stage.html snippet into the body of the page
