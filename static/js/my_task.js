@@ -36,12 +36,12 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	// "instructions/instruct-1.html",
-	// "instructions/instruct-2.html",
-	// "instructions/instruct-3.html",
-	// "instructions/instruct-5.html",
-	// "instructions/instruct-6.html",
-	// "instructions/instruct-8.html",
+	"instructions/instruct-1.html",
+	"instructions/instruct-2.html",
+	"instructions/instruct-3.html",
+	"instructions/instruct-5.html",
+	"instructions/instruct-6.html",
+	"instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -178,6 +178,8 @@ var StroopExperiment = function(trials) {
 									'report_on_screen': report_on_screen,
 									'n_drop': session["n_drop"],
 									'trial': JSON.stringify(stims),
+									'acc_rwd': session["acc_rwd"],
+									'total_reward': session["total_reward"],
 									'session': JSON.stringify(session)
                                });
 
@@ -256,13 +258,14 @@ var StroopExperiment = function(trials) {
 	var abort = function(){
 		// current accumulated money, minus penalty of 1$, plust 50cent minimum
 		value = math.round(session["acc_rwd"]*session["max_reward"]+0.5-1,2)
+		value = math.round(math.max(0.5,session["total_reward"]-1),2)
 		answer = confirm("Do you want to abort with a penalty of $1 and leave with with $"+value+"?");
 		//answer = confirm("If you choose to abort, send the code "+uniqueId+" to me by email, please");
 
 		if (answer) {
 			psiTurk.showPage('thanks.html'); 
 			currentview = new Questionnaire();
-			session["total_reward"] = math.max(0.5,session["total_reward"]+0.5-1)
+			session["total_reward"] = math.max(0.5,session["total_reward"]-1)
 		}
 	}
 
@@ -271,16 +274,15 @@ var StroopExperiment = function(trials) {
 
 		case TASK:
 			psiTurk.showPage('repeat_task.html');
-			session["total_reward"] = session["total_reward"]+0.5
+			session["total_reward"] = session["total_reward"]
 
 			update_stats()
 			$("#repeat").click(function () { 
-				session["max_reward"] = math.min(MAX_RWD,session["max_reward"]+1)
+				session["max_reward"] = math.min(MAX_RWD,session["max_reward"]+0.5)
 				gen_trials2(params,exp_callback)
 			});
 			$("#finish").click(function () {
 				psiTurk.showPage('thanks.html');
-				//answer = confirm("Don't forget to send the code "+uniqueId+" to me by email, please");
 				currentview = new Questionnaire();});
 			break;
 

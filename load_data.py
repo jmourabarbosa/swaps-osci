@@ -11,9 +11,12 @@ from scipy.io import savemat
 maxi = "debug0mip6"
 genis = "debugniQER"
 david = "debugr7vsw"
+heike = ["debug1V9C5","debug3qTe3","debug5flKX"]
+
 
 db_url = "sqlite:///participants.db"
 db_url = "sqlite:///max.db"
+db_url = "sqlite:///heike.db"
 table_name = 'swaps'
 data_column_name = 'datastring'
 # boilerplace sqlalchemy setup
@@ -75,7 +78,7 @@ for r in rows:
 		trials_data = get_trials_data(data)
 		all_trials[workerID] = filter_data(trials_data)
 
-good_workers = [genis,david]
+good_workers = [genis,david,maxi]+heike
 
 X=[]
 T_c=[]
@@ -125,6 +128,7 @@ nt_p = concatenate(NT_p)
 c=concatenate(C)
 d=concatenate(D)
 c=c==1
+c=d==0
 
 
 X_show =[]
@@ -159,9 +163,10 @@ NT_hide =[]
 # NT_show =NT_show[c==1]
 
 
-c=c==1
 loads = amap(len,nt_c)
-for load in range(1,max(unique(loads))+1):
+for load in unique(loads):
+	if load == 0:
+		continue 
 	idx = load == loads
 	X_show+=[x[idx & c]]
 	X_hide+=[x[idx & ~c]]

@@ -17,6 +17,8 @@ from numpy import loadtxt
 import random
 from pickle import load
 
+
+
 # load the configuration options
 config = PsiturkConfig()
 config.load_config()
@@ -90,7 +92,7 @@ def compute_bonus():
         user_data = loads(user.datastring) # load datastring from JSON
         bonus = 0
 
-        for record in user_data['data']: # for line in data file
+        for record in user_data['data']: 
             trial = record['trialdata']
             if trial['phase']=='TEST':
                 if trial['hit']==True:
@@ -149,6 +151,8 @@ def gen_trial_idx(max_t,n):
 
 def load_from_db(params):
     trialset = []
+    if 0 in params["delays"]:
+        params["delays"].pop(params["delays"].index(0))
 
     for show in [0,1]:
         for delay in params["delays"]:
@@ -157,6 +161,12 @@ def load_from_db(params):
                 trial_idx = gen_trial_idx(len(trials),params["n_trials"])
                 # need to add delay here
                 trialset += add_cond(trials[trial_idx].tolist(),["delay","show"],[delay,show])
+
+    for stim in params["stims"]:
+        trials = all_trials[stim-1]
+        trial_idx = gen_trial_idx(len(trials),params["n_trials"])
+        # need to add delay here
+        trialset += add_cond(trials[trial_idx].tolist(),["delay","show"],[0,0])
 
     return trialset
 
@@ -170,5 +180,5 @@ def add_cond(trial_list,conds_s,cond):
 
 params = {}
 params["delays"]=[0,3]
-params["n_trials"]  = 4
-params["stims"] = [1,3]
+params["n_trials"]  = 10
+params["stims"] = [1,2,3,4]

@@ -33,13 +33,11 @@ function unstretch(angle){
 }
 
 function stretch_stims(trials){
-				console.log(trials[0][0])
 
 	for (t=0;t<trials.length;t++){
 		trial = trials[t]
 		for (s=0;s<trial.length;s++)
 			stim = trial[s]
-			console.log(stim)
 			stim.color = stretch(stim.color)
 	}
 
@@ -94,27 +92,28 @@ var nanobar = function(){
 }
 
 function compute_rwd(dist){
-	rwd = 1/math.exp(2*dist)
+	rwd = 1/math.exp(dist)
 	return rwd
 }
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 10
+	params["max_reward"] = 4
 	params["total_reward"] = 0
 
 	if (type) { 
-	    params["n_trials"] = 2
+	    params["n_trials"] = 1
 	    params["stims"] = [1,2]
-	    params["delays"] = [1]
+	    params["delays"] = [0,3]
     }
     else {
 	    params["n_trials"] = 10
-		params["stims"] = [2,3,5,6]
+		params["stims"] = [2,3,4,5]
 		params["delays"] = [0,3]
 	}
 
-	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*params["delays"].length
+	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*(params["delays"].length-1) 
+							+ params["n_trials"]*params["stims"].length
 	return params
 }
 
@@ -407,7 +406,7 @@ var feedback = function(report_pos,report_angle){
 
 	center = [CENTER[0]-40,CENTER[1]-40]
 
-	if (dist > math.pi/2){
+	if (dist > math.pi/4){
 
 		feed_text = "0¢"
 		fill = "#FA5858"
@@ -720,7 +719,7 @@ var color_blind_test = function(next_step){
 				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
 				"Plate6.gif"];
-	figures =[ "Plate12.gif"]
+	// figures =[ "Plate12.gif"]
 
 	figure_codes = [12,15,26,3,45,8,16,29,42,5,6];
 
