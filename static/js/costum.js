@@ -8,7 +8,9 @@ norm = [-0.287209  , -0.42802111, -0.5593022 , -0.58103565, -0.58222462,
        -0.22333333,  0.        ]
 norm = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 norm = [0, 0.6, 0.5, 0.2, 0, 0, -0.4, -1, -1.4, -1.5, -1.5, -1.1, -0.1, 0.6, 0.9, 1, 1, 0.7, 0.5, 0.3, 0.3, 0.1, 0.1, -0.1, 1.2, 0.9, 0.5, 0.3, 0.3, 0.2, -0.2, -0.3, -0.5, -0.6, -0.6, -0.4, 0]
-
+norm = [0,-0.8,-0.7,-0.4,0.1,0.5,1,1.6,2.3,2.9,3.3,3.4,3,1.9,-0.8,-1.3,-1.7,-1.3,-1.1,-0.9,-0.7,-0.4,-0.1,0.2,0,-0.5,-0.4,-0.3,-0.3,-0.2,0.3,0.4,0.4,0.5,0.7,0.7,0]
+norm = [-0, 0.8, 0.7, 0.4, -0.1, -0.5, -1, -1.6, -2.3, -2.9, -3.3, -3.4, -3, -1.9, 0.8, 1.3, 1.7, 1.3, 1.1, 0.9, 0.7, 0.4, 0.1, -0.2, -0, 0.5, 0.4, 0.3, 0.3, 0.2, -0.3, -0.4, -0.4, -0.5, -0.7, -0.7, -0]
+norm = [-0, 0.6, 0.6, 0.3, -0.1, -0.5, -1, -1.6, -2.3, -2.8, -3, -2.6, -1.5, 2, 2.7, 2.8, 2.4, 1.8, 1.2, 0.9, 0.7, 0.4, 0.1, -0.2, -0, 0.9, 0.6, 0.2, -0, -0.4, -0.8, -1.3, -1.9, -2, -1.8, -1.5, 0.2]
 function get_norm(prop,step){
 	i_norm = math.floor(prop * norm.length)
 
@@ -28,6 +30,19 @@ function unstretch(angle){
 	return angle
 }
 
+function stretch_stims(trials){
+				console.log(trials[0][0])
+
+	for (t=0;t<trials.length;t++){
+		trial = trials[t]
+		for (s=0;s<trial.length;s++)
+			stim = trial[s]
+			console.log(stim)
+			stim.color = stretch(stim.color)
+	}
+
+	return trials
+}
 function compute_factor(){
 
 	params = session["params"]
@@ -84,15 +99,16 @@ var default_params = function (type){
 
 	params={}
 	params["max_reward"] = 10
+	params["total_reward"] = 0
 
 	if (type) { 
-	    params["n_trials"] = 1
+	    params["n_trials"] = 2
 	    params["stims"] = [1,2]
 	    params["delays"] = [1]
     }
     else {
-	    params["n_trials"] = 1
-		params["stims"] = [1,3,5,6]
+	    params["n_trials"] = 10
+		params["stims"] = [2,3,5,6]
 		params["delays"] = [0,3]
 	}
 
@@ -382,10 +398,12 @@ var feedback = function(report_pos,report_angle){
 
 	report_color = angle2rgb(report_angle);
 	correct = session["trial"][session['correct']];
-	correct_color = stretch(correct["color"])
+	correct_color = correct["color"]
 	correct_pos = angle2pos(correct_color,WHEEL_Y/2-21,CENTER)
 	dist = math.abs(circ_dist(report_angle, correct_color))
 	console.log(session["total_reward"])
+
+	center = [CENTER[0]-40,CENTER[1]-40]
 
 	if (dist > math.pi/2){
 
@@ -393,24 +411,25 @@ var feedback = function(report_pos,report_angle){
 		fill = "#FA5858"
 		animation="fadeOutDown"
 
-		center = [CENTER[0]-40,CENTER[1]-80]
 
 	}
 	else{
-		center = [CENTER[0]-80,CENTER[1]-80]
 		rwd_amount = math.max(compute_rwd(dist)*max_rwd,0.01)
 		feed_text = math.round(rwd_amount*100)+"¢"
 		if (session["phase"] == TEST){
-			center = [CENTER[0]-80,CENTER[1]-80]
+			center = [CENTER[0]-80,CENTER[1]-40]
 			feed_text = "correct"
 		}
 
 		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
 		session["total_reward"] += rwd_amount
 		fill ="#58FA58"
+		r =  250-math.round(compute_rwd(dist)*250)
+		fill = encapsulate_rgb([r,250,0])
 		session["n_correct"]++
 		animation="fadeOutUp"
 	}
+
 
 	// rotate correct color for this wheel rotation
 	// report angle was rotated on main routine, so also rotating it back
@@ -419,7 +438,7 @@ var feedback = function(report_pos,report_angle){
 
 	screen.insert("text")
 		.attr("x",center[0])
-		.attr("y", center[0])
+		.attr("y", center[1])
 		.attr("id","feedback")
 		.attr("font-size",50)
 		.attr("font-family","Verdana")
@@ -695,13 +714,13 @@ var update_stats = function(){
 
 var color_blind_test = function(next_step){
 	figures =[ "Plate12.gif","Plate15.gif","Plate26.gif",
-				"Plate3.gif","Plate45.gif","Plate7.gif",
+				"Plate3.gif","Plate45.gif",
 				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
 				"Plate6.gif"];
-	//figures =[ "Plate12.gif"]
+	figures =[ "Plate12.gif"]
 
-	figure_codes = [12,15,26,3,45,7,8,16,29,42,5,6];
+	figure_codes = [12,15,26,3,45,8,16,29,42,5,6];
 
 	
 	img = document.createElement("IMG");

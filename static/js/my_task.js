@@ -36,12 +36,12 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	"instructions/instruct-1.html",
-	"instructions/instruct-2.html",
-	"instructions/instruct-3.html",
-	"instructions/instruct-5.html",
-	"instructions/instruct-6.html",
-	"instructions/instruct-8.html",
+	// "instructions/instruct-1.html",
+	// "instructions/instruct-2.html",
+	// "instructions/instruct-3.html",
+	// "instructions/instruct-5.html",
+	// "instructions/instruct-6.html",
+	// "instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -116,7 +116,7 @@ FIX_SIZE = 20
 
 MAX_RWD = 20
 
-N_SEGS = 360
+N_SEGS = 180
 
 
 /************************
@@ -160,7 +160,6 @@ var StroopExperiment = function(trials) {
     	}
 
 
-
 		report_angle = pos2angle([report_x,report_y],CENTER);
 		report_angle = circ_dist(report_angle,-session["wheel_offset"])
 
@@ -172,13 +171,13 @@ var StroopExperiment = function(trials) {
 		psiTurk.recordTrialData({	'load': session["trial"].length,
 									'delay': session["delay"],
 									'show': session["show"],
-									'report_color': report_angle,
+									'report_color': stretch(report_angle),
 									'rt':rt,
 									'phase':session["phase"],
 									'report_pos': report_pos,
 									'report_on_screen': report_on_screen,
 									'n_drop': session["n_drop"],
-									'trial': JSON.stringify(session["trial"]),
+									'trial': JSON.stringify(stims),
 									'session': JSON.stringify(session)
                                });
 
@@ -304,7 +303,7 @@ var StroopExperiment = function(trials) {
 
 
 	// Initialize experiment variables
-	session['trials'] = trials;
+	session['trials'] = stretch_stims(trials);
 	session["total_trials"] = trials.length
 	session["n_correct"] = 0
 	session['trial_number'] = 0;
@@ -312,7 +311,7 @@ var StroopExperiment = function(trials) {
 	session['acc_rwd'] = 0
 	session["bar"] = undefined
 	session["max_reward"] = params["max_reward"]
-	session["total_reward"] = 0
+	session["total_reward"] = params["total_reward"]
 	session_init();
 
 	// Load the stage.html snippet into the body of the page
