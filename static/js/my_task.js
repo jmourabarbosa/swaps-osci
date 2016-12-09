@@ -167,6 +167,10 @@ var StroopExperiment = function(trials) {
 		report_on_screen = [report_x,report_y]
 
 		rt = new Date().getTime() - session["wheel_on"];
+		
+		feedback(report_on_screen,report_angle)
+
+		console.log(session["trial_rwd"])
 
 		psiTurk.recordTrialData({	'load': session["trial"].length,
 									'delay': session["delay"],
@@ -184,7 +188,6 @@ var StroopExperiment = function(trials) {
 									'session': JSON.stringify(session)
                                });
 
-		feedback(report_on_screen,report_angle)
 
 		// reset session variables
 		session_init()
