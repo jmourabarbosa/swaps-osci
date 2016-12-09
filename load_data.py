@@ -17,7 +17,7 @@ heike = ["debug1V9C5","debug3qTe3","debug5flKX"]
 db_url = "sqlite:///participants.db"
 db_url = "sqlite:///max.db"
 db_url = "sqlite:///heike.db"
-db_url = "sqlite:///amt_5.db"
+db_url = "sqlite:///1st_amt.db"
 
 table_name = 'swaps'
 data_column_name = 'datastring'
@@ -55,6 +55,7 @@ def filter_data(data):
 		trial["rt"] = d["rt"]
 
 		stims = json.loads(d["trial"])
+		stims = json.loads(d["session"])["trial"]
 		NT = []
 		for i,s in enumerate(stims):
 			if s["correct"]:
@@ -81,6 +82,8 @@ for r in rows:
 		all_trials[workerID] = filter_data(trials_data)
 
 good_workers = [genis,david,maxi]+heike
+good_workers = all_trials.keys()
+
 
 X=[]
 T_c=[]
@@ -130,7 +133,7 @@ nt_p = concatenate(NT_p)
 c=concatenate(C)
 d=concatenate(D)
 c=c==1
-c=d==0
+
 
 
 X_show =[]

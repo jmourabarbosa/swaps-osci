@@ -170,7 +170,6 @@ var StroopExperiment = function(trials) {
 
 		feedback(report_on_screen,report_angle)
 
-
 		psiTurk.recordTrialData({	'load': session["trial"].length,
 									'delay': session["delay"],
 									'show': session["show"],
@@ -181,7 +180,7 @@ var StroopExperiment = function(trials) {
 									'report_pos': report_pos,
 									'report_on_screen': report_on_screen,
 									'n_drop': session["n_drop"],
-									'trial': JSON.stringify(stims),
+									'trial': JSON.stringify(trial),
 									'acc_rwd': session["acc_rwd"],
 									'total_reward': session["total_reward"],
 									'session': JSON.stringify(session)
@@ -281,7 +280,7 @@ var StroopExperiment = function(trials) {
 
 			update_stats()
 			$("#repeat").click(function () { 
-				session["max_reward"] = math.min(MAX_RWD,session["max_reward"]+0.5)
+				params["max_reward"] = math.min(MAX_RWD,session["max_reward"]+0.5)
 				gen_trials2(params,exp_callback)
 			});
 			$("#finish").click(function () {

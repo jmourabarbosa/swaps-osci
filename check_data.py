@@ -17,7 +17,7 @@ heike = ["debug1V9C5","debug3qTe3","debug5flKX"]
 db_url = "sqlite:///participants.db"
 db_url = "sqlite:///max.db"
 db_url = "sqlite:///heike.db"
-db_url = "sqlite:///amt_5.db"
+db_url = "sqlite:///1st_amt.db"
 
 table_name = 'swaps'
 data_column_name = 'datastring'
@@ -42,6 +42,8 @@ def to_pi(angles):
 def get_trials_data(data):
 	idx = find([not d['trialdata']['phase'] for d in data["data"]])
 	trialdata = [data["data"][i]["trialdata"] for i in idx]
+	trialdata = [d["trialdata"] for d in data["data"]]
+
 	return trialdata
 
 def filter_data(data):
