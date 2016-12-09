@@ -104,7 +104,7 @@ var default_params = function (type){
 	if (type) { 
 	    params["n_trials"] = 1
 	    params["stims"] = [1,2]
-	    params["delays"] = [0,3]
+	    params["delays"] = [3]
     }
     else {
 	    params["n_trials"] = 10
@@ -400,9 +400,13 @@ var feedback = function(report_pos,report_angle){
 			feed_text = "correct"
 		}
 
-		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
-		session["trial_rwd"] = math.round(rwd_amount*100)/100
-		session["total_reward"] += rwd_amount
+		else{
+			session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
+			session["trial_rwd"] = math.round(rwd_amount*100)/100
+			session["total_reward"] += rwd_amount
+		}
+
+
 		fill ="#58FA58"
 		r =  250-math.round(compute_rwd(dist)*250)
 		fill = encapsulate_rgb([r,250,0])
