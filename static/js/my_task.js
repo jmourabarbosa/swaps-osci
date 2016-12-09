@@ -317,7 +317,7 @@ var StroopExperiment = function(trials) {
 	session['acc_rwd'] = 0
 	session["bar"] = undefined
 	session["max_reward"] = params["max_reward"]
-	session["total_reward"] = params["total_reward"]
+	session["total_reward"] = 0
 	session_init();
 
 	// Load the stage.html snippet into the body of the page

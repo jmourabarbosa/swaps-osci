@@ -281,10 +281,10 @@ var flicker_background=function(){
 
 }
 
-var fade_fix = function(tau){
-	var init_time = new Date().getTime()/1000;
-	for (delta = 0; math.exp(delta*tau)>0.1; delta = (init_time - new Date().getTime()/1000))
-}
+// var fade_fix = function(tau){
+// 	var init_time = new Date().getTime()/1000;
+// 	for (delta = 0; math.exp(delta*tau)>0.1; delta = (init_time - new Date().getTime()/1000))
+// }
 
 var gen_catches = function(){
 

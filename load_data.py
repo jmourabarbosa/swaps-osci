@@ -17,6 +17,8 @@ heike = ["debug1V9C5","debug3qTe3","debug5flKX"]
 db_url = "sqlite:///participants.db"
 db_url = "sqlite:///max.db"
 db_url = "sqlite:///heike.db"
+db_url = "sqlite:///amt_5.db"
+
 table_name = 'swaps'
 data_column_name = 'datastring'
 # boilerplace sqlalchemy setup
