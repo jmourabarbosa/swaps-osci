@@ -260,15 +260,15 @@ var StroopExperiment = function(trials) {
 
 	var abort = function(){
 		// current accumulated money, minus penalty of 1$, plust 50cent minimum
-		value = math.round(session["acc_rwd"]*session["max_reward"]-1,2)
-		value = math.round(math.max(0,session["total_reward"]-1),2)
-		answer = confirm("Do you want to abort with a penalty of $1 and leave with with a bonus of $"+value+"?");
+		value = math.round(session["acc_rwd"]*session["max_reward"]-0.5,2)
+		value = math.round(math.max(0,session["total_reward"]-0.5),2)
+		answer = confirm("Do you want to abort with a penalty of $0.5 and leave with with a bonus of $"+value+"?");
 		//answer = confirm("If you choose to abort, send the code "+uniqueId+" to me by email, please");
 
 		if (answer) {
 			psiTurk.showPage('thanks.html'); 
 			currentview = new Questionnaire();
-			session["total_reward"] = math.max(0,session["total_reward"]-1)
+			session["total_reward"] = math.max(0,session["total_reward"]-0.5)
 		}
 	}
 
