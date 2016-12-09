@@ -102,7 +102,7 @@ var default_params = function (type){
 	params["total_reward"] = 0
 
 	if (type) { 
-	    params["n_trials"] = 2
+	    params["n_trials"] = 1
 	    params["stims"] = [2]
 	    params["delays"] = [3]
     }
@@ -395,13 +395,14 @@ var feedback = function(report_pos,report_angle){
 	else{
 		rwd_amount = math.max(compute_rwd(dist)*max_rwd,0.01)
 		feed_text = math.round(rwd_amount*100)+"¢"
+		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
+
 		if (session["phase"] == TEST){
 			center = [CENTER[0]-80,CENTER[1]-40]
 			feed_text = "correct"
 		}
 
 		else{
-			session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
 			session["trial_rwd"] = math.round(rwd_amount*100)/100
 			session["total_reward"] += rwd_amount
 		}
