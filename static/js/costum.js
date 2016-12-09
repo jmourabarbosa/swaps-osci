@@ -98,18 +98,18 @@ function compute_rwd(dist){
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 4
+	params["max_reward"] = 5
 	params["total_reward"] = 0
 
 	if (type) { 
 	    params["n_trials"] = 1
-	    params["stims"] = [1]//[1,2]
-	    params["delays"] = [0]//[0,3]
+	    params["stims"] = [1,2]
+	    params["delays"] = [0,3]
     }
     else {
-	    params["n_trials"] = 1//10
-		params["stims"] = [1]//[2,3,4,5]
-		params["delays"] = [0]//[0,3]
+	    params["n_trials"] = 10
+		params["stims"] = [2,3,4,5,6]
+		params["delays"] = [0,3]
 	}
 
 	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*(params["delays"].length-1) 
@@ -284,7 +284,6 @@ var flicker_background=function(){
 var fade_fix = function(tau){
 	var init_time = new Date().getTime()/1000;
 	for (delta = 0; math.exp(delta*tau)>0.1; delta = (init_time - new Date().getTime()/1000))
-		console.log(math.exp(delta)/tau,delta)
 }
 
 var gen_catches = function(){
@@ -373,7 +372,7 @@ var session_init=function(){
 var feedback = function(report_pos,report_angle){
 
 	report_angle = stretch(report_angle)
-	hide_stimulus()
+	//hide_stimulus()
 
 	max_rwd = session["factor"]*session["n_stims"]*session["max_reward"]
 
@@ -628,7 +627,6 @@ function draw_wheel (screen) {
   
     segments.attr('d', myArc)
         .attr('fill', function(d,i) {
-      		//console.log(i,numberOfSegments)
           rotation = -deg2rad(90)+session["wheel_offset"]
       	  angle = deg2rad((i) * degrees)
       	  angle=circ_dist(angle,-rotation)
@@ -699,7 +697,7 @@ var color_blind_test = function(next_step){
 				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
 				"Plate6.gif"];
-	figures =[ "Plate12.gif"]
+	// figures =[ "Plate12.gif"]
 
 	figure_codes = [12,15,26,3,45,8,16,29,42,5,6];
 
@@ -729,7 +727,6 @@ var color_blind_test = function(next_step){
 		pass = true
 		for (i=0;i<inputs.length;i++)
 			pass &= inputs[i].value==figure_codes[i]
-			console.log(i,pass)
 
 		if (pass){
 			next_step()

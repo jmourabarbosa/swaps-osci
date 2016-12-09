@@ -36,12 +36,12 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	// "instructions/instruct-1.html",
-	// "instructions/instruct-2.html",
-	// "instructions/instruct-3.html",
-	// "instructions/instruct-5.html",
-	// "instructions/instruct-6.html",
-	// "instructions/instruct-8.html",
+	"instructions/instruct-1.html",
+	"instructions/instruct-2.html",
+	"instructions/instruct-3.html",
+	"instructions/instruct-5.html",
+	"instructions/instruct-6.html",
+	"instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -114,7 +114,7 @@ WHITE=0
 BLACK=1
 FIX_SIZE = 20
 
-MAX_RWD = 20
+MAX_RWD = 10
 
 N_SEGS = 90
 
@@ -167,10 +167,9 @@ var StroopExperiment = function(trials) {
 		report_on_screen = [report_x,report_y]
 
 		rt = new Date().getTime() - session["wheel_on"];
-		
+
 		feedback(report_on_screen,report_angle)
 
-		console.log(session["trial_rwd"])
 
 		psiTurk.recordTrialData({	'load': session["trial"].length,
 									'delay': session["delay"],
@@ -261,15 +260,15 @@ var StroopExperiment = function(trials) {
 
 	var abort = function(){
 		// current accumulated money, minus penalty of 1$, plust 50cent minimum
-		value = math.round(session["acc_rwd"]*session["max_reward"]+0.5-1,2)
-		value = math.round(math.max(0.5,session["total_reward"]-1),2)
-		answer = confirm("Do you want to abort with a penalty of $1 and leave with with $"+value+"?");
+		value = math.round(session["acc_rwd"]*session["max_reward"]-1,2)
+		value = math.round(math.max(0,session["total_reward"]-1),2)
+		answer = confirm("Do you want to abort with a penalty of $1 and leave with with a bonus of $"+value+"?");
 		//answer = confirm("If you choose to abort, send the code "+uniqueId+" to me by email, please");
 
 		if (answer) {
 			psiTurk.showPage('thanks.html'); 
 			currentview = new Questionnaire();
-			session["total_reward"] = math.max(0.5,session["total_reward"]-1)
+			session["total_reward"] = math.max(0,session["total_reward"]-1)
 		}
 	}
 
