@@ -97,9 +97,8 @@ def compute_bonus():
         for report in data: # for line in data file
             trial = report['trialdata']
             if trial["phase"]==TASK:
-                print "rws",trial["trial_rwd"]
                 bonus+=trial["trial_rwd"]
-        print bonus
+
         user.bonus = bonus
         db_session.add(user)
         db_session.commit()

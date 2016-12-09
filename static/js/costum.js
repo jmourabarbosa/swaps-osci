@@ -402,7 +402,7 @@ var feedback = function(report_pos,report_angle){
 		}
 
 		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
-		session["trial_rwd"] = math.round(rwd_amount*100)
+		session["trial_rwd"] = math.round(rwd_amount*100)/100
 		session["total_reward"] += rwd_amount
 		fill ="#58FA58"
 		r =  250-math.round(compute_rwd(dist)*250)
