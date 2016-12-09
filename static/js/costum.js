@@ -102,7 +102,7 @@ var default_params = function (type){
 	params["total_reward"] = 0
 
 	if (type) { 
-	    params["n_trials"] = 3
+	    params["n_trials"] = 2
 	    params["stims"] = [2]
 	    params["delays"] = [3]
     }
