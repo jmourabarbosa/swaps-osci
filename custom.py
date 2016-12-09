@@ -17,7 +17,9 @@ from numpy import loadtxt
 import random
 from pickle import load
 
-
+# trial type
+TASK=0
+TEST=1
 
 # load the configuration options
 config = PsiturkConfig()
@@ -74,7 +76,6 @@ def list_my_data():
 #----------------------------------------------
 # example computing bonus
 #----------------------------------------------
-
 @custom_code.route('/compute_bonus', methods=['GET'])
 def compute_bonus():
     # check that user provided the correct keys
@@ -92,11 +93,12 @@ def compute_bonus():
         user_data = loads(user.datastring) # load datastring from JSON
         bonus = 0
 
-        for record in user_data['data']: 
-            trial = record['trialdata']
-            if trial['phase']=='TEST':
-                if trial['hit']==True:
-                    bonus += 0.02
+        data = user_data['data']
+        for report in data: # for line in data file
+            trial = report['trialdata']
+            if trial["phase"]==TASK:
+                bonus+=trial["trial_rwd"]
+        
         user.bonus = bonus
         db_session.add(user)
         db_session.commit()
@@ -104,7 +106,6 @@ def compute_bonus():
         return jsonify(**resp)
     except:
         abort(404)  # again, bad to display HTML, but...
-
 
 #----------------------------------------------
 # get a session of stimuli

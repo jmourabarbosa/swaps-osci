@@ -36,12 +36,12 @@ var pages = [
 psiTurk.preloadPages(pages);
 
 var instructionPages = [ // add as a list as many pages as you like
-	"instructions/instruct-1.html",
-	"instructions/instruct-2.html",
-	"instructions/instruct-3.html",
-	"instructions/instruct-5.html",
-	"instructions/instruct-6.html",
-	"instructions/instruct-8.html",
+	// "instructions/instruct-1.html",
+	// "instructions/instruct-2.html",
+	// "instructions/instruct-3.html",
+	// "instructions/instruct-5.html",
+	// "instructions/instruct-6.html",
+	// "instructions/instruct-8.html",
 	"instructions/instruct-ready.html"
 ];
 
@@ -171,6 +171,7 @@ var StroopExperiment = function(trials) {
 		psiTurk.recordTrialData({	'load': session["trial"].length,
 									'delay': session["delay"],
 									'show': session["show"],
+									'trial_rwd': session["trial_rwd"],
 									'report_color': stretch(report_angle),
 									'rt':rt,
 									'phase':session["phase"],
@@ -307,7 +308,8 @@ var StroopExperiment = function(trials) {
 	// Initialize experiment variables
 	session['trials'] = stretch_stims(trials);
 	session["total_trials"] = trials.length
-	session["n_correct"] = 0
+	session["n_correct"] = 0;
+	session['trial_rwd'] = 0;
 	session['trial_number'] = 0;
 	session['start_time'] = Date.now()
 	session['acc_rwd'] = 0

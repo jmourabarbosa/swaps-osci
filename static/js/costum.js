@@ -103,13 +103,13 @@ var default_params = function (type){
 
 	if (type) { 
 	    params["n_trials"] = 1
-	    params["stims"] = [1,2]
-	    params["delays"] = [0,3]
+	    params["stims"] = [1]//[1,2]
+	    params["delays"] = [0]//[0,3]
     }
     else {
-	    params["n_trials"] = 10
-		params["stims"] = [2,3,4,5]
-		params["delays"] = [0,3]
+	    params["n_trials"] = 1//10
+		params["stims"] = [1]//[2,3,4,5]
+		params["delays"] = [0]//[0,3]
 	}
 
 	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*(params["delays"].length-1) 
@@ -117,26 +117,6 @@ var default_params = function (type){
 	return params
 }
 
-var default_parms_freq = function (type){
-	params={}
-	params["max_reward"] = 10
-
-	if (type) { 
-	    params["n_trials"] = 5
-	    params["stims"] = [1]
-	    params["delays"] = [1]
-	    params["freqs"] = [10]
-    }
-    else {
-	    params["n_trials"] = 1
-		params["stims"] = [5]
-		params["delays"] = [1]
-		params["freqs"] = [8]
-	}
-
-	params["total_trials"] = params["freqs"].length*params["n_trials"]*params["stims"].length*params["delays"].length
-	return params
-}
 
 var gen_trials2 = function(params,callback){
 
@@ -402,7 +382,6 @@ var feedback = function(report_pos,report_angle){
 	correct_color = correct["color"]
 	correct_pos = angle2pos(correct_color,WHEEL_Y/2-21,CENTER)
 	dist = math.abs(circ_dist(report_angle, correct_color))
-	console.log(session["total_reward"])
 
 	center = [CENTER[0]-40,CENTER[1]-40]
 
@@ -423,6 +402,7 @@ var feedback = function(report_pos,report_angle){
 		}
 
 		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
+		session["trial_rwd"] = compute_rwd(dist)*session["factor"]*session["n_stims"]
 		session["total_reward"] += rwd_amount
 		fill ="#58FA58"
 		r =  250-math.round(compute_rwd(dist)*250)
@@ -719,7 +699,7 @@ var color_blind_test = function(next_step){
 				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
 				"Plate6.gif"];
-	// figures =[ "Plate12.gif"]
+	figures =[ "Plate12.gif"]
 
 	figure_codes = [12,15,26,3,45,8,16,29,42,5,6];
 
