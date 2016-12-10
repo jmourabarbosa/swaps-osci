@@ -170,6 +170,11 @@ var StroopExperiment = function(trials) {
 
 		feedback(report_on_screen,report_angle)
 
+		// avoid saving all trials everytime
+		// restore below
+		trials = session["trials"]
+		session["trials"] = 0
+
 		psiTurk.recordTrialData({	'load': session["trial"].length,
 									'delay': session["delay"],
 									'show': session["show"],
@@ -186,6 +191,8 @@ var StroopExperiment = function(trials) {
 									'session': JSON.stringify(session)
                                });
 
+		// restore here
+		session["trials"] = trials
 
 		// reset session variables
 		session_init()
@@ -325,6 +332,11 @@ var StroopExperiment = function(trials) {
 	session["factor"] = compute_factor()
 
 	$("#abort").click(function () { abort()});
+
+			psiTurk.recordTrialData({
+									'phase': 'all trials',
+									'session': JSON.stringify(trials)
+                               });
 
 
 	// Start the experiment
