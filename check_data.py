@@ -71,6 +71,7 @@ def filter_data(data):
 
 
 all_trials  = {}
+hits=[]
 for r in rows:
 	rs.append(r)
 	if r["datastring"]:
@@ -78,6 +79,7 @@ for r in rows:
 		workerID = data["workerId"]
 		trials_data = get_trials_data(data)
 		all_trials[workerID]=trials_data
+		hits.append(data["hitId"])
 
 trials = [len(all_trials[k])for k in all_trials.keys()]
 k=all_trials.keys()
@@ -85,5 +87,5 @@ k=all_trials.keys()
 idx=argsort(trials)
 
 for i in idx:
-	print k[i],trials[i]
+	print hits[i],k[i],trials[i]
 
