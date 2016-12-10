@@ -82,7 +82,7 @@ for r in rows:
 trials = [len(all_trials[k])for k in all_trials.keys()]
 k=all_trials.keys()
 
-idx=argsort(tt)
+idx=argsort(trials)
 
 for i in idx:
 	print k[i],trials[i]
