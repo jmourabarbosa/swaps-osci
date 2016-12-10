@@ -14,10 +14,10 @@ david = "debugr7vsw"
 heike = ["debug1V9C5","debug3qTe3","debug5flKX"]
 
 
-db_url = "sqlite:///participants.db"
 db_url = "sqlite:///max.db"
 db_url = "sqlite:///heike.db"
 db_url = "sqlite:///1st_amt.db"
+db_url = "sqlite:///participants.db"
 
 table_name = 'swaps'
 data_column_name = 'datastring'

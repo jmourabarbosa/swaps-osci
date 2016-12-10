@@ -86,12 +86,14 @@ def compute_bonus():
     uniqueId = request.args['uniqueId']
 
     try:
+        print "looking for user: ", uniqueId
         # lookup user in database
         user = Participant.query.\
                filter(Participant.uniqueid == uniqueId).\
                one()
         user_data = loads(user.datastring) # load datastring from JSON
         bonus = 0
+        print "found it. computing his bonuses."
 
         data = user_data['data']
         for report in data: # for line in data file
@@ -99,9 +101,11 @@ def compute_bonus():
             if trial["phase"]==TASK:
                 bonus+=trial["trial_rwd"]
 
+        print "bonus: ",bonus
         user.bonus = bonus
         db_session.add(user)
         db_session.commit()
+        print "commited to db"
         resp = {"bonusComputed": "success"}
         return jsonify(**resp)
     except:

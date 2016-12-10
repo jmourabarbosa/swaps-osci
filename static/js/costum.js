@@ -107,9 +107,9 @@ var default_params = function (type){
 	    params["delays"] = [3]
     }
     else {
-	    params["n_trials"] = 1//10
-		params["stims"] = [1]//[2,3,4,5,6]
-		params["delays"] = [0]//[0,3]
+	    params["n_trials"] = 10
+		params["stims"] = [2,3,4,5,6]
+		params["delays"] = [0,3]
 	}
 
 	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*(params["delays"].length-1) 
