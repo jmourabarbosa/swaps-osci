@@ -83,5 +83,5 @@ for r in rows:
 		trials_data = get_trials_data(data)
 		all_trials[workerID]=trials_data
 
-
+print [(k,len(all_trials[k])) for k in all_trials.keys()]
 
