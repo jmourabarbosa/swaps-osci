@@ -6,6 +6,7 @@ from numpy import *
 from matplotlib.mlab import *
 from circ_stats import *
 from scipy.io import savemat
+import sys
 
 
 maxi = "debug0mip6"
@@ -17,7 +18,7 @@ heike = ["debug1V9C5","debug3qTe3","debug5flKX"]
 db_url = "sqlite:///max.db"
 db_url = "sqlite:///heike.db"
 db_url = "sqlite:///1st_amt.db"
-db_url = "sqlite:///participants.db"
+db_url = sys.argv[1]
 
 table_name = 'swaps'
 data_column_name = 'datastring'
