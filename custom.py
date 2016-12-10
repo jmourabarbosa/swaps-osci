@@ -3,19 +3,23 @@
 from flask import Blueprint, render_template, request, jsonify, Response, abort, current_app
 from jinja2 import TemplateNotFound
 from functools import wraps
-from sqlalchemy import or_
+from sqlalchemy import or_, create_engine, MetaData, Table
 
 from psiturk.psiturk_config import PsiturkConfig
 from psiturk.experiment_errors import ExperimentError
 from psiturk.user_utils import PsiTurkAuthorization, nocache
 
 # # Database setup
-from psiturk.db import db_session, init_db
+from psiturk.db import db_session, init_db, engine
 from psiturk.models import Participant
 from json import dumps, loads
 from numpy import loadtxt
 import random
 from pickle import load
+import json
+from matplotlib.mlab import find
+from numpy import argsort,nan
+
 
 # trial type
 TASK=0
@@ -64,12 +68,65 @@ def my_password_protected_route():
 #----------------------------------------------
 # example accessing data
 #----------------------------------------------
+# filter subjects with no real experiment
+
+# returns last session
+def get_session(data):
+
+    session={}
+    session["phase"] = nan
+    session["total_reward"] = nan
+    session["trial_number"] = nan
+
+    s=json.dumps(session)
+
+    for i in range(1,len(data)):
+        if "session" in data[-i].keys():
+            s=data[-i]["session"]
+            break
+
+    session = json.loads(s)
+    session["total_reward"] = round(session["total_reward"],2)
+
+    return session
+
 @custom_code.route('/view_data')
 @myauth.requires_auth
 def list_my_data():
         users = Participant.query.all()
+
+
+        table_name = 'swaps'
+        data_column_name = 'datastring'
+        # boilerplace sqlalchemy setup
+        metadata = MetaData()
+        metadata.bind = engine
+        table = Table(table_name, metadata, autoload=True)
+        # make a query and loop through
+        s = table.select()
+        rows = s.execute()
+
+        all_trials  = {}
+        hits=[]
+        trials = []
+        workerIDs =[]
+        sessions = []
+        for r in rows:
+            if r["datastring"]:
+                data=json.loads(r['datastring'])
+                workerID = data["workerId"]
+                trials_data = get_trials_data(data)
+                session = get_session(trials_data)
+                trials.append(len(trials_data))
+                workerIDs.append(workerID)
+                hits.append(data["hitId"])
+                sessions.append(session)
+
+        idx=argsort(trials)
+
+
 	try:
-		return render_template('list.html', participants=users)
+		return render_template('list.html', participants=workerIDs,hits=hits,trials=trials,sessions=sessions,sort_idx=idx)
 	except TemplateNotFound:
 		abort(404)
 
@@ -182,6 +239,13 @@ def add_cond(trial_list,conds_s,cond):
                 t[s][cond_s] = cond[i]
 
     return trial_list
+
+def get_trials_data(data):
+    idx = find([not d['trialdata']['phase'] for d in data["data"]])
+    trialdata = [data["data"][i]["trialdata"] for i in idx]
+    trialdata = [d["trialdata"] for d in data["data"]]
+
+    return trialdata
 
 params = {}
 params["delays"]=[0,3]

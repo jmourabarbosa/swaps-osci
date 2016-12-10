@@ -272,6 +272,7 @@ var StroopExperiment = function(trials) {
 		//answer = confirm("If you choose to abort, send the code "+uniqueId+" to me by email, please");
 
 		if (answer) {
+			session["abort"]=true
 			psiTurk.showPage('thanks.html'); 
 			currentview = new Questionnaire();
 			session["total_reward"] = math.max(0,session["total_reward"]-0.5)
@@ -302,6 +303,7 @@ var StroopExperiment = function(trials) {
 			$("#repeat").click(start_test);
 			$("#begin").click(function () {
 				session['phase'] = TASK; 
+				session["session"]=0;
 		 		params = default_params(TASK);
 		 		gen_trials2(params,exp_callback);
 		 	});
@@ -324,6 +326,8 @@ var StroopExperiment = function(trials) {
 	session["bar"] = undefined
 	session["max_reward"] = params["max_reward"]
 	session["total_reward"] = 0
+	session["abort"] = false 
+	session["sessions"]+=1
 	session_init();
 
 	// Load the stage.html snippet into the body of the page
@@ -333,11 +337,10 @@ var StroopExperiment = function(trials) {
 
 	$("#abort").click(function () { abort()});
 
-			psiTurk.recordTrialData({
-									'phase': 'all trials',
-									'session': JSON.stringify(trials)
-                               });
-
+	psiTurk.recordTrialData({
+							'phase': 'all trials',
+							'trials': JSON.stringify(trials)
+                       });
 
 	// Start the experiment
 	next();
