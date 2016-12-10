@@ -122,7 +122,10 @@ def list_my_data():
                 workerIDs.append(workerID)
                 hits.append(data["hitId"])
                 sessions.append(session)
-                phase.append(trials_data[-1]["phase"])
+                if len(trials_data) > 0:
+                    phase.append(trials_data[-1]["phase"])
+                else:
+                    phase.append("X")
 
         idx=argsort(trials)
 
