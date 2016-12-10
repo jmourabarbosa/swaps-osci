@@ -1,4 +1,5 @@
 <h1>Here are all your users in the database</h1>
+
 {% for i in sort_idx: %}
-	HIT:{{ hits[i] }} &nbsp; WORKER:{{ participants[i]}} &nbsp; PHASE:{{ sessions[i]["phase"] }} &nbsp; RWD:{{ sessions[i]["total_reward"]}} &nbsp; TRIAL:{{ sessions[i]["trial_number"] }}<br />
+	HIT:{{ hits[i] }} &nbsp; WORKER:{{ participants[i]}} &nbsp; PHASE:{{phase[i] }} &nbsp; RWD:{{ sessions[i]["total_reward"]}} &nbsp; TRIAL:{{ sessions[i]["trial_number"] }}<br />
 {% endfor %}

@@ -111,6 +111,7 @@ def list_my_data():
         trials = []
         workerIDs =[]
         sessions = []
+        phase = []
         for r in rows:
             if r["datastring"]:
                 data=json.loads(r['datastring'])
@@ -121,12 +122,13 @@ def list_my_data():
                 workerIDs.append(workerID)
                 hits.append(data["hitId"])
                 sessions.append(session)
+                phase.append(trials_data[-1]["phase"])
 
         idx=argsort(trials)
 
 
 	try:
-		return render_template('list.html', participants=workerIDs,hits=hits,trials=trials,sessions=sessions,sort_idx=idx)
+		return render_template('list.html', participants=workerIDs,hits=hits,trials=trials,sessions=sessions,phase=phase,sort_idx=idx)
 	except TemplateNotFound:
 		abort(404)
 
