@@ -14,10 +14,6 @@ genis = "debugniQER"
 david = "debugr7vsw"
 heike = ["debug1V9C5","debug3qTe3","debug5flKX"]
 
-
-db_url = "sqlite:///max.db"
-db_url = "sqlite:///heike.db"
-db_url = "sqlite:///1st_amt.db"
 db_url = "sqlite:///"+sys.argv[1]
 
 table_name = 'swaps'
@@ -83,5 +79,11 @@ for r in rows:
 		trials_data = get_trials_data(data)
 		all_trials[workerID]=trials_data
 
-print [(k,len(all_trials[k])) for k in all_trials.keys()]
+trials = [len(all_trials[k])for k in all_trials.keys()]
+k=all_trials.keys()
+
+idx=argsort(tt)
+
+for i in idx:
+	print k[i],trials[i]
 
