@@ -39,7 +39,7 @@ def to_pi(angles):
 def get_trials_data(data):
 	idx = find([not d['trialdata']['phase'] for d in data["data"]])
 	trialdata = [data["data"][i]["trialdata"] for i in idx]
-	trialdata = [d["trialdata"] for d in data["data"]]
+	# trialdata = [d["trialdata"] for d in data["data"]]
 
 	return trialdata
 
@@ -72,6 +72,8 @@ def filter_data(data):
 
 all_trials  = {}
 hits=[]
+rwd = []
+bonus = []
 for r in rows:
 	rs.append(r)
 	if r["datastring"]:
@@ -80,6 +82,13 @@ for r in rows:
 		trials_data = get_trials_data(data)
 		all_trials[workerID]=trials_data
 		hits.append(data["hitId"])
+		if len(trials_data)>0:
+			rwd.append(trials_data[-1]["total_reward"])
+			bonus.append(sum([t["trial_rwd"] for t in trials_data]))
+		else:
+			rwd.append(0)
+			bonus.append(0)
+
 
 trials = [len(all_trials[k])for k in all_trials.keys()]
 k=all_trials.keys()
@@ -87,5 +96,5 @@ k=all_trials.keys()
 idx=argsort(trials)
 
 for i in idx:
-	print hits[i],k[i],trials[i]
+	print hits[i],k[i],trials[i],bonus[i],rwd[i]
 

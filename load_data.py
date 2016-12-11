@@ -6,31 +6,44 @@ from numpy import *
 from matplotlib.mlab import *
 from circ_stats import *
 from scipy.io import savemat
+import sys
+import os
 
 
-maxi = "debug0mip6"
-genis = "debugniQER"
-david = "debugr7vsw"
-heike = ["debug1V9C5","debug3qTe3","debug5flKX"]
+
+# db_url = "sqlite:///"+sys.argv[1]
+
+# table_name = 'swaps'
+# data_column_name = 'datastring'
+# # boilerplace sqlalchemy setup
+# engine = create_engine(db_url)
+# metadata = MetaData()
+# metadata.bind = engine
+# table = Table(table_name, metadata, autoload=True)
+# # make a query and loop through
+# s = table.select()
+# rows = s.execute()
+# rs = []
+# ds = []
 
 
-db_url = "sqlite:///participants.db"
-db_url = "sqlite:///max.db"
-db_url = "sqlite:///heike.db"
-db_url = "sqlite:///1st_amt.db"
+dbs = amap(lambda x: x.split(".db"),os.listdir(sys.argv[1]))
+dbs = dbs[amap(len,dbs)>1]
 
-table_name = 'swaps'
-data_column_name = 'datastring'
-# boilerplace sqlalchemy setup
-engine = create_engine(db_url)
-metadata = MetaData()
-metadata.bind = engine
-table = Table(table_name, metadata, autoload=True)
-# make a query and loop through
-s = table.select()
-rows = s.execute()
-rs = []
-ds = []
+Rows = []
+for db in dbs:
+	db_url = "sqlite:///"+sys.argv[1]+db[0]+".db"
+	table_name = 'swaps'
+	data_column_name = 'datastring'
+	# boilerplace sqlalchemy setup
+	engine = create_engine(db_url)
+	metadata = MetaData()
+	metadata.bind = engine
+	table = Table(table_name, metadata, autoload=True)
+	# make a query and loop through
+	s = table.select()
+	rows = s.execute()
+	Rows.append(rows)
 
 def to_pi(angles):
 	angles = array(angles)
@@ -73,15 +86,17 @@ def filter_data(data):
 
 
 all_trials  = {}
-for r in rows:
-	rs.append(r)
-	if r["datastring"]:
-		data=json.loads(r['datastring'])
-		workerID = data["workerId"]
-		trials_data = get_trials_data(data)
-		all_trials[workerID] = filter_data(trials_data)
+for rows in Rows:
+	for r in rows:
+		if r["datastring"]:
+			data=json.loads(r['datastring'])
+			workerID = data["workerId"]
+			trials_data = get_trials_data(data)
+			if len(trials_data) > 50:
+				all_trials[workerID] = filter_data(trials_data)
 
-good_workers = [genis,david,maxi]+heike
+
+
 good_workers = all_trials.keys()
 
 
@@ -92,6 +107,7 @@ NT_c = []
 NT_p = []
 D=[]
 C=[]
+loads = []
 for wid in good_workers:
 
 	x=[]
@@ -102,7 +118,8 @@ for wid in good_workers:
 	d=[]
 	c=[]
 	for trial in all_trials[wid]:
-		load = (len(trial)-7)/2
+		load = trial["load"]
+		loads.append(load)
 		x.append(trial["report_color"])
 		t_c.append(trial["T_color"])
 		t_p.append(trial["T_pos"])
@@ -110,7 +127,7 @@ for wid in good_workers:
 		c.append(trial["show"])
 		nt_c1=[]
 		nt_p1=[]
-		for nt in range(load):
+		for nt in range(load-1):
 			nt_c1.append(trial["NT_color"+str(nt)])
 			nt_p1.append(trial["NT_pos"+str(nt)])
 		nt_c.append(nt_c1)
@@ -132,8 +149,8 @@ nt_c = concatenate(NT_c)
 nt_p = concatenate(NT_p)
 c=concatenate(C)
 d=concatenate(D)
-c=c==1
-
+c= (c==1)
+d=~(d==0)
 
 
 X_show =[]
@@ -168,17 +185,16 @@ NT_hide =[]
 # NT_show =NT_show[c==1]
 
 
-loads = amap(len,nt_c)
 for load in unique(loads):
-	if load == 0:
+	if load == 1:
 		continue 
 	idx = load == loads
-	X_show+=[x[idx & c]]
-	X_hide+=[x[idx & ~c]]
-	T_show+=[amap(to_pi,t_c[idx & c])]
-	T_hide+=[amap(to_pi,t_c[idx & ~c])]
-	NT_show+=[amap(to_pi,nt_c[idx & c])]
-	NT_hide+=[amap(to_pi,nt_c[idx & ~c])]
+	X_show+=[x[idx & c & d]]
+	X_hide+=[x[idx & ~c & d]]
+	T_show+=[amap(to_pi,t_c[idx & c & d])]
+	T_hide+=[amap(to_pi,t_c[idx & ~c & d])]
+	NT_show+=[amap(to_pi,nt_c[idx & c & d])]
+	NT_hide+=[amap(to_pi,nt_c[idx & ~c & d])]
 
 
 X_hide=array(X_hide)

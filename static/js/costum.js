@@ -98,7 +98,7 @@ function compute_rwd(dist){
 var default_params = function (type){
 
 	params={}
-	params["max_reward"] = 5
+	params["max_reward"] = 3
 	params["total_reward"] = 0
 
 	if (type) { 
@@ -107,13 +107,12 @@ var default_params = function (type){
 	    params["delays"] = [3]
     }
     else {
-	    params["n_trials"] = 10
+	    params["n_trials"] = 20
 		params["stims"] = [2,3,4,5,6]
-		params["delays"] = [0,3]
+		params["delays"] = [3]
 	}
 
-	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*(params["delays"].length-1) 
-							+ params["n_trials"]*params["stims"].length
+	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*(params["delays"].length) 
 	return params
 }
 
@@ -384,7 +383,7 @@ var feedback = function(report_pos,report_angle){
 
 	center = [CENTER[0]-40,CENTER[1]-40]
 
-	if (dist > math.pi/4){
+	if (dist > math.pi/5){
 
 		feed_text = "0¢"
 		fill = "#FA5858"
@@ -393,8 +392,8 @@ var feedback = function(report_pos,report_angle){
 
 	}
 	else{
-		rwd_amount = math.max(compute_rwd(dist)*max_rwd,0.01)
-		feed_text = math.round(rwd_amount*100)+"¢"
+		rwd_amount = math.max(compute_rwd(dist)*max_rwd,0.005)
+		feed_text = math.round(rwd_amount*100,1)+"¢"
 		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
 
 		if (session["phase"] == TEST){
@@ -403,7 +402,7 @@ var feedback = function(report_pos,report_angle){
 		}
 
 		else{
-			session["trial_rwd"] = math.round(rwd_amount*100)/100
+			session["trial_rwd"] = math.round(rwd_amount*100,1)/100
 			session["total_reward"] += rwd_amount
 		}
 
