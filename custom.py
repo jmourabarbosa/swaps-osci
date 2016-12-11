@@ -161,7 +161,7 @@ def compute_bonus():
         for report in data: # for line in data file
             trial = report['trialdata']
             if trial["phase"]==TASK:
-                bonus=round(trial["total_reward"],2)
+                bonus+=trial["trial_rwd"]
 
         print "bonus: ",bonus
         user.bonus = bonus
