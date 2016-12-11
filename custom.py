@@ -163,6 +163,7 @@ def compute_bonus():
             if trial["phase"]==TASK:
                 bonus+=trial["trial_rwd"]
 
+        bonus = round(bonus,2)
         print "bonus: ",bonus
         user.bonus = bonus
         db_session.add(user)
@@ -229,11 +230,11 @@ def load_from_db(params):
                 # need to add delay here
                 trialset += add_cond(trials[trial_idx].tolist(),["delay","show"],[delay,show])
 
-    for stim in params["stims"]:
-        trials = all_trials[stim-1]
-        trial_idx = gen_trial_idx(len(trials),params["n_trials"])
-        # need to add delay here
-        trialset += add_cond(trials[trial_idx].tolist(),["delay","show"],[0,0])
+    # for stim in params["stims"]:
+    #     trials = all_trials[stim-1]
+    #     trial_idx = gen_trial_idx(len(trials),params["n_trials"])
+    #     # need to add delay here
+    #     trialset += add_cond(trials[trial_idx].tolist(),["delay","show"],[0,0])
 
     return trialset
 

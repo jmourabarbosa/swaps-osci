@@ -1,3 +1,4 @@
+from __future__ import division
 from sqlalchemy import create_engine, MetaData, Table
 import json
 import pandas as pd
@@ -74,6 +75,8 @@ all_trials  = {}
 hits=[]
 rwd = []
 bonus = []
+trials = []
+k=[]
 for r in rows:
 	rs.append(r)
 	if r["datastring"]:
@@ -81,17 +84,16 @@ for r in rows:
 		workerID = data["workerId"]
 		trials_data = get_trials_data(data)
 		all_trials[workerID]=trials_data
+		trials.append(len(trials_data))
 		hits.append(data["hitId"])
+		k.append(workerID)
 		if len(trials_data)>0:
 			rwd.append(trials_data[-1]["total_reward"])
 			bonus.append(sum([t["trial_rwd"] for t in trials_data]))
 		else:
-			rwd.append(0)
-			bonus.append(0)
+			rwd.append(-1)
+			bonus.append(-1)
 
-
-trials = [len(all_trials[k])for k in all_trials.keys()]
-k=all_trials.keys()
 
 idx=argsort(trials)
 

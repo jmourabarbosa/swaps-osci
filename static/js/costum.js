@@ -22,6 +22,48 @@ function get_norm(prop,step){
 
 }
 
+
+var flicker_all_stim_alpha = function(){
+
+	// if ((session["state"] != REPORT) && (session["state"] != DELAY)){
+	// 	return
+	// }
+
+	// if ((session["state"] != DELAY)){
+	// 	return
+	// }
+
+	if (session["state"] != REPORT){
+		return
+	}
+	
+	// rad = STIM_SIZE
+	// if(oscilate(session["freq"])<0){
+	// 	rad = 0
+	// }
+
+	// oscilate() -> [-1,1] => abs(oscilate()/2)=> [0-1]
+	rad = math.abs(STIM_SIZE*(oscilate(session["freq"]/2)))
+	alpha = oscilate(session["freq"])
+
+	var all_stims = d3.select("#all_stims").selectAll("[id^='stim']")[0]
+	var n_stims = all_stims.length
+
+
+	while (n_stims) {
+		var stim = all_stims[n_stims-1];
+		//stim.setAttribute("r",rad)
+		stim.setAttribute("fill-opacity",alpha)
+		stim.setAttribute("stroke-opacity",alpha)
+
+		n_stims--
+	}
+
+	window.requestAnimationFrame(flicker_all_stim_alpha)
+
+}
+
+
 function stretch(angle){
 	angle=circ_dist(angle,-get_norm(angle2pi(angle)/(2*math.pi),(Math.PI * 2) / N_SEGS))
 	return angle
@@ -393,7 +435,9 @@ var feedback = function(report_pos,report_angle){
 	}
 	else{
 		rwd_amount = math.max(compute_rwd(dist)*max_rwd,0.005)
-		feed_text = math.round(rwd_amount*100,1)+"¢"
+		rwd_amount =  math.round(rwd_amount*100,1)/100
+
+		feed_text = rwd_amount*100+"¢"
 		session["acc_rwd"] += compute_rwd(dist)*session["factor"]*session["n_stims"]
 
 		if (session["phase"] == TEST){
@@ -402,8 +446,8 @@ var feedback = function(report_pos,report_angle){
 		}
 
 		else{
-			session["trial_rwd"] = math.round(rwd_amount*100,1)/100
-			session["total_reward"] += rwd_amount
+			session["trial_rwd"] =rwd_amount
+			session["total_reward"] = rwd_amount
 		}
 
 
