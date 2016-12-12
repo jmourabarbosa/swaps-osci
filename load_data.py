@@ -8,6 +8,8 @@ from circ_stats import *
 from scipy.io import savemat
 import sys
 import os
+import scikits.bootstrap as bootstrap
+
 
 
 
@@ -63,7 +65,7 @@ def filter_data(data):
 		trial = {}
 		trial["load"] = d["load"]
 		trial["delay"] = d["delay"]
-		trial["show"] = d["show"]
+		trial["freq"] = d["freq"]
 		trial["report_color"] = d["report_color"]
 		trial["rt"] = d["rt"]
 
@@ -92,7 +94,7 @@ for rows in Rows:
 			data=json.loads(r['datastring'])
 			workerID = data["workerId"]
 			trials_data = get_trials_data(data)
-			if len(trials_data) > 50:
+			if len(trials_data) > 300:
 				all_trials[workerID] = filter_data(trials_data)
 
 
@@ -108,6 +110,7 @@ NT_p = []
 D=[]
 C=[]
 loads = []
+RT=[]
 for wid in good_workers:
 
 	x=[]
@@ -117,6 +120,7 @@ for wid in good_workers:
 	nt_p=[]	
 	d=[]
 	c=[]
+	rt=[]
 	for trial in all_trials[wid]:
 		load = trial["load"]
 		loads.append(load)
@@ -124,7 +128,9 @@ for wid in good_workers:
 		t_c.append(trial["T_color"])
 		t_p.append(trial["T_pos"])
 		d.append(trial["delay"])
-		c.append(trial["show"])
+		c.append(trial["freq"])
+		rt.append(trial["rt"])
+
 		nt_c1=[]
 		nt_p1=[]
 		for nt in range(load-1):
@@ -140,6 +146,7 @@ for wid in good_workers:
 	NT_p.append(nt_p)
 	D.append(d)
 	C.append(c)
+	RT.append(rt)
 
 
 x=concatenate(X)
@@ -147,67 +154,51 @@ t_c = concatenate(T_c)
 t_p = concatenate(T_p)
 nt_c = concatenate(NT_c)
 nt_p = concatenate(NT_p)
+rt = concatenate(RT)
 c=concatenate(C)
-d=concatenate(D)
-c= (c==1)
-d=~(d==0)
+d = array(loads) == 2
+
+X=[]
+T=[]
+NT=[]
+RT=[]
+
+for freq in unique(c):
+	idx = freq == c
+	X+=[x[idx & d]]
+	T+=[amap(to_pi,t_c[idx & d])]
+	NT+=[amap(to_pi,nt_c[idx & d])]
+	RT+=[rt[idx & d]]
 
 
-X_show =[]
-T_show =[]
-NT_show =[]
-
-X_hide =[]
-T_hide =[]
-NT_hide =[]
-
-# colapsing all loads
-# nt_idx = amap(len,nt_c) >0
-# for i,nt in enumerate(nt_c[nt_idx]):
-# 	dist_to_nt = abs(circdist(x[nt_idx][i],nt))
-# 	close = argsort(dist_to_nt)[0]
-# 	X_show.append(x[nt_idx][i])
-# 	T_show.append(t_c[nt_idx][i])
-# 	NT_show.append(nt[close])
-
-# c = c[nt_idx]
-# X_show = array(X_show)
-# T_show = array(T_show)
-# NT_show = array(NT_show)
-
-# X_hide = X_show[c==0]
-# T_hide = T_show[c==0]
-# NT_hide =NT_show[c==0]
+X=array(X)
+T =array(T)
+NT =array(NT)
+freqs = {"X": X, "T": T, "NT": NT}
 
 
-# X_show = X_show[c==1]
-# T_show = T_show[c==1]
-# NT_show =NT_show[c==1]
+savemat("osci_d.mat",freqs)
 
+figure()
+title("mean error")
+mean_err = array([bootstrap.ci(abs(circdist(X[i],T[i])),circmean) for i in range(len(X))])
+plot(unique(c),ones(len(unique(c)))*mean(mean_err[0]),"r--",label="hide")
+plot(unique(c),mean(mean_err,1),"b")
+plot(unique(c),mean(mean_err,1),"bo",ms=5)
 
-for load in unique(loads):
-	if load == 1:
-		continue 
-	idx = load == loads
-	X_show+=[x[idx & c & d]]
-	X_hide+=[x[idx & ~c & d]]
-	T_show+=[amap(to_pi,t_c[idx & c & d])]
-	T_hide+=[amap(to_pi,t_c[idx & ~c & d])]
-	NT_show+=[amap(to_pi,nt_c[idx & c & d])]
-	NT_hide+=[amap(to_pi,nt_c[idx & ~c & d])]
+fill_between(unique(c),mean_err[:,0],mean_err[:,1],alpha=0.1)
 
+legend()
 
-X_hide=array(X_hide)
-T_hide =array(T_hide)
-NT_hide =array(NT_hide)
-hide_d = {"X": X_hide, "T": T_hide, "NT": NT_hide}
+figure()
+title("mean RT")
+for i in range(len(RT)): RT[i]=RT[i][RT[i]<3*std(RT[i])]
 
-X_show = array(X_show)
-T_show = array(T_show)
-NT_show = array(NT_show)
-show_d = {"X": X_show, "T": T_show, "NT": NT_show}
+mean_err = array([bootstrap.ci(RT[i],mean) for i in range(len(X))])
+plot(unique(c),ones(len(unique(c)))*mean(mean_err[0]),"r--",label="hide")
+plot(unique(c),mean(mean_err,1),"b")
+plot(unique(c),mean(mean_err,1),"bo",ms=5)
 
-savemat("show_d.mat",show_d)
-savemat("hide_d.mat",hide_d)
+fill_between(unique(c),mean_err[:,0],mean_err[:,1],alpha=0.1)
 
-
+legend()

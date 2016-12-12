@@ -134,7 +134,7 @@ var StroopExperiment = function(trials) {
 			session["correct"] = get_correct();
 			session["delay"] = session["trial"][0]["delay"]*1000
 			session["state"] = FIX;
-			session["show"] = session["trial"][0]["show"]
+			session["freq"] = session["trial"][0]["freq"]
 			session["n_stims"] = session["trial"].length
 			screen = start_screen();
 			draw_fix(screen,"white");
@@ -177,7 +177,7 @@ var StroopExperiment = function(trials) {
 
 		psiTurk.recordTrialData({	'load': session["trial"].length,
 									'delay': session["delay"],
-									'show': session["show"],
+									'freq': session["freq"],
 									'trial_rwd': session["trial_rwd"],
 									'report_color': stretch(report_angle),
 									'rt':rt,
@@ -238,10 +238,8 @@ var StroopExperiment = function(trials) {
 			// Delay 
 			case DELAY:
 				blank_stimuli()
-				//drop_stimuli()
-				if (!session["show"])
-					hide_stimulus()
-				//window.requestAnimationFrame(flicker_all_stim)
+
+				window.requestAnimationFrame(flicker_all_stim_alpha)
 				session["state"] = REPORT;
 				setTimeout(function () {show_trial()},session["delay"])
 				break;
@@ -266,9 +264,8 @@ var StroopExperiment = function(trials) {
 
 	var abort = function(){
 		// current accumulated money, minus penalty of 1$, plust 50cent minimum
-		value = math.round(session["acc_rwd"]*session["max_reward"]-0.5,2)
-		value = math.round(math.max(0,session["total_reward"]-0.5),2)
-		answer = confirm("Do you want to abort with a penalty of $0.5 and leave with with a bonus of $"+value+"?");
+		value = math.round(math.max(0,session["total_reward"]),2)
+		answer = confirm("Do you want to abort with a bonus of $"+value+"?");
 		//answer = confirm("If you choose to abort, send the code "+uniqueId+" to me by email, please");
 
 		if (answer) {
@@ -304,7 +301,7 @@ var StroopExperiment = function(trials) {
 			$("#begin").click(function () {
 				session['phase'] = TASK; 
 				session["session"]=0;
-		 		params = default_params(TASK);
+		 		params = default_params_freq(TASK);
 		 		gen_trials2(params,exp_callback);
 		 	});
     		break;
@@ -350,7 +347,7 @@ exp_callback = function(trials,params) { session["params"] = params;currentview 
 
 var start_test = function(){
 
-	params = default_params(TEST);
+	params = default_params_freq(TEST);
 	session['phase'] = TEST
     psiTurk.doInstructions(
     	instructionPages, 

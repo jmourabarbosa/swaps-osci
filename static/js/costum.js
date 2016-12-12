@@ -36,7 +36,17 @@ var flicker_all_stim_alpha = function(){
 	if (session["state"] != REPORT){
 		return
 	}
+
+	if (session["freq"] == 0){
+		// stable stimuli
+		return
+	}
 	
+	if (session["freq"] < 0){
+		hide_stimulus()
+		return
+	}
+
 	// rad = STIM_SIZE
 	// if(oscilate(session["freq"])<0){
 	// 	rad = 0
@@ -45,6 +55,7 @@ var flicker_all_stim_alpha = function(){
 	// oscilate() -> [-1,1] => abs(oscilate()/2)=> [0-1]
 	rad = math.abs(STIM_SIZE*(oscilate(session["freq"]/2)))
 	alpha = oscilate(session["freq"])
+	console.log(session["freq"])
 
 	var all_stims = d3.select("#all_stims").selectAll("[id^='stim']")[0]
 	var n_stims = all_stims.length
@@ -155,6 +166,31 @@ var default_params = function (type){
 	}
 
 	params["total_trials"] = 2*params["n_trials"]*params["stims"].length*(params["delays"].length) 
+	return params
+}
+
+
+var default_params_freq = function (type){
+
+	params={}
+	params["max_reward"] = 4
+	params["total_reward"] = 0
+
+	if (type) { 
+	    params["n_trials"] = 1
+	    params["stims"] = [5]
+	    params["delays"] = [3]
+	    params["freqs"] = [1,8]
+
+    }
+    else {
+	    params["n_trials"] = 10
+	    params["stims"] = [2,5]
+	    params["delays"] = [3]
+	    params["freqs"] = [-1,0,4,5,6,7,8,9,10,11,12]
+	}
+
+	params["total_trials"] = params["n_trials"]*params["stims"].length*(params["delays"].length)*(params["freqs"].length)  
 	return params
 }
 
@@ -447,7 +483,7 @@ var feedback = function(report_pos,report_angle){
 
 		else{
 			session["trial_rwd"] =rwd_amount
-			session["total_reward"] = rwd_amount
+			session["total_reward"] += rwd_amount
 		}
 
 
@@ -726,8 +762,6 @@ var update_stats = function(){
 	for (i=0;i<rws.length;i++)
 		rws[i].innerHTML = math.round(session["acc_rwd"]*100,2)
 
-	parms = default_params()
-
 	$("#total_trials")[0].innerHTML = params["total_trials"]
 	$("#total_duration")[0].innerHTML = math.floor(params["total_trials"]/80*10)+1
 	$("#max_reward")[0].innerHTML = params["max_reward"]
@@ -745,7 +779,7 @@ var color_blind_test = function(next_step){
 				"Plate8.gif","Plate16.gif",
 				"Plate29.gif","Plate42.gif","Plate5.gif",
 				"Plate6.gif"];
-	// figures =[ "Plate12.gif"]
+	//figures =[ "Plate12.gif"]
 
 	figure_codes = [12,15,26,3,45,8,16,29,42,5,6];
 
